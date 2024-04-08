@@ -97,3 +97,7 @@ CREATE TABLE `user` (
   `phone` VARCHAR(45) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 );
+
+-- Insert a new administrator with specific username and password
+INSERT INTO ecommercedatabase.administrator (username, password)
+VALUES ('X03607503', 'BigBoss22');
