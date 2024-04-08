@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.HomepageController">
+   <children>
+      <VBox prefHeight="100.0" prefWidth="1300.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="home" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0" text="Home" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="categories" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0" text="Categories" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <ImageView fx:id="searchLogo" fitHeight="25.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/search.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="250.0">
+                     <children>
+                        <TextField fx:id="searchbar" prefHeight="32.0" prefWidth="222.0" promptText="Search" />
+                     </children></HBox>
+                  <HBox alignment="CENTER" layoutX="310.0" layoutY="10.0" prefHeight="100.0" prefWidth="138.0">
+                     <children>
+                        <ImageView fx:id="stjohnsLogo" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/StjohnsLogo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="SPACER" prefHeight="100.0" prefWidth="298.0" />
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="60.0">
+                     <children>
+                        <ImageView fx:id="userProfileIcon" fitHeight="40.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/profile.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="username" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="100.0" text="Login/Register" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <ImageView fx:id="cart" fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/cart.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="-1.0" layoutY="101.0" prefHeight="700.0" prefWidth="1300.0">
+         <children>
+            <HBox prefHeight="341.0" prefWidth="1300.0">
+               <children>
+                  <HBox prefHeight="340.0" prefWidth="650.0">
+                     <children>
+                        <FlowPane alignment="CENTER" prefHeight="340.0" prefWidth="650.0">
+                           <children>
+                              <ImageView fitHeight="270.0" fitWidth="650.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button alignment="CENTER" mnemonicParsing="false" prefHeight="54.0" prefWidth="232.0" style="-fx-background-color: #CF102D;" text="Upload Image" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </Button>
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="340.0" prefWidth="650.0">
+                     <children>
+                        <FlowPane alignment="CENTER" prefHeight="340.0" prefWidth="650.0">
+                           <children>
+                              <HBox prefHeight="71.0" prefWidth="606.0">
+                                 <children>
+                                    <TextField prefHeight="49.0" prefWidth="608.0" promptText="Name:">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="32.0" layoutY="144.0" prefHeight="71.0" prefWidth="606.0">
+                                 <children>
+                                    <ComboBox prefHeight="74.0" prefWidth="606.0" promptText="Category" />
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="32.0" layoutY="180.0" prefHeight="71.0" prefWidth="606.0">
+                                 <children>
+                                    <TextField prefHeight="49.0" prefWidth="608.0" promptText="Size (if applicable)::">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="32.0" layoutY="215.0" prefHeight="71.0" prefWidth="606.0">
+                                 <children>
+                                    <TextField prefHeight="49.0" prefWidth="608.0" promptText="Price:">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="32.0" layoutY="109.0" prefHeight="71.0" prefWidth="606.0">
+                                 <children>
+                                    <TextField prefHeight="49.0" prefWidth="608.0" promptText="Stock:">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="32.0" layoutY="81.0" prefHeight="71.0" prefWidth="606.0" />
+                           </children>
+                        </FlowPane>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="222.0" prefWidth="1300.0">
+               <children>
+                  <Label prefHeight="52.0" prefWidth="126.0" text="Description: ">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextArea prefHeight="198.0" prefWidth="971.0">
+                     <HBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </HBox.margin>
+                  </TextArea>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="232.0" style="-fx-background-color: #CF102D;" text="List Item" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
