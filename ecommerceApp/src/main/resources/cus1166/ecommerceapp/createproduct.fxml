@@ -46,7 +46,7 @@
                      </children></HBox>
                   <HBox alignment="CENTER" layoutX="310.0" layoutY="10.0" prefHeight="100.0" prefWidth="138.0">
                      <children>
-                        <ImageView fx:id="stjohnsLogo" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="StJohnsLogo" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@Images/StjohnsLogo.png" />
                            </image>
