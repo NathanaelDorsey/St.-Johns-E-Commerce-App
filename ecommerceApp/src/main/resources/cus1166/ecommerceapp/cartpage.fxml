@@ -1,14 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Cartpage"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cartpage">
+   <children>
+      <Accordion />
+      <HBox layoutY="7.0" prefHeight="100.0" prefWidth="111.0" />
+      <Label fx:id="home" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="39.0" text="Home" />
+      <ImageView fx:id="searchLogo" fitHeight="19.0" fitWidth="33.0" layoutX="116.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/search.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="searchbar" layoutX="149.0" layoutY="12.0" prefHeight="26.0" prefWidth="98.0" promptText="Search" />
+      <Label fx:id="categories" alignment="CENTER_RIGHT" layoutX="56.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="60.0" text="Categories" />
+      <ImageView fx:id="stjohnsLogo" fitHeight="39.0" fitWidth="111.0" layoutX="252.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/StjohnsLogo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="userProfileIcon" fitHeight="19.0" fitWidth="33.0" layoutX="451.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/profile.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="username" alignment="CENTER" layoutX="470.0" layoutY="13.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="19.0" prefWidth="91.0" text="Login/Register" />
+      <ImageView fx:id="cart" fitHeight="19.0" fitWidth="39.0" layoutX="562.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/cart.png" />
+         </image>
+      </ImageView>
+      <HBox fx:id="box" alignment="CENTER" layoutX="10.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="181.0" spacing="15.0">
+         <children>
+            <ImageView fx:id="productImage" fitHeight="83.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../java/images/shirt.png" />
+               </image>
+            </ImageView>
+            <VBox prefHeight="86.0" prefWidth="105.0">
+               <children>
+                  <Label fx:id="productName" prefHeight="34.0" prefWidth="184.0" text="Product Name">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Distrlbutor" />
+                  <Label fx:id="rating" layoutX="10.0" layoutY="86.0" prefHeight="25.0" prefWidth="184.0" text="Rating">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="price" layoutX="10.0" layoutY="10.0" prefHeight="14.0" prefWidth="184.0" text="Product Price">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox fx:id="box1" alignment="CENTER" layoutX="10.0" layoutY="157.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="181.0" spacing="15.0">
+         <children>
+            <ImageView fx:id="productImage1" fitHeight="83.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../java/images/shirt.png" />
+               </image>
+            </ImageView>
+            <VBox prefHeight="86.0" prefWidth="105.0">
+               <children>
+                  <Label fx:id="productName1" prefHeight="34.0" prefWidth="184.0" text="Product Name">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Distrlbutor" />
+                  <Label fx:id="rating1" layoutX="10.0" layoutY="86.0" prefHeight="25.0" prefWidth="184.0" text="Rating">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="price1" layoutX="10.0" layoutY="10.0" prefHeight="14.0" prefWidth="184.0" text="Product Price">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox fx:id="box11" alignment="CENTER" layoutX="10.0" layoutY="243.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="181.0" spacing="15.0">
+         <children>
+            <ImageView fx:id="productImage11" fitHeight="83.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../java/images/shirt.png" />
+               </image>
+            </ImageView>
+            <VBox prefHeight="86.0" prefWidth="105.0">
+               <children>
+                  <Label fx:id="productName11" prefHeight="34.0" prefWidth="184.0" text="Product Name">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Distrlbutor" />
+                  <Label fx:id="rating11" layoutX="10.0" layoutY="86.0" prefHeight="25.0" prefWidth="184.0" text="Rating">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="price11" layoutX="10.0" layoutY="10.0" prefHeight="14.0" prefWidth="184.0" text="Product Price">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox alignment="BOTTOM_LEFT" layoutX="394.0" layoutY="57.0" prefHeight="258.0" prefWidth="206.0">
+         <children>
+            <Label text="ORDER: $" />
+            <Label text="SALDES TAX: $" />
+            <Label text="TOTAL : $" />
+         </children>
+      </VBox>
+      <Button layoutX="394.0" layoutY="317.0" mnemonicParsing="false" text="BUY NOW" />
+   </children>
 </AnchorPane>
