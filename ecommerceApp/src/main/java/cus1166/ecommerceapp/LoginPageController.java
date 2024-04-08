@@ -82,19 +82,29 @@ public class LoginPageController implements Initializable {
 
     @FXML
     private void Register(ActionEvent event) {
-        connection = DBUtils.ConnectDb();
-        String sql = "insert into user (username, password, email) values (?,?,?)";
-        try {
-            pst = connection.prepareStatement(sql);
-            pst.setString(1, rxNumber.getText());
-            pst.setString(2, rpassword.getText());
-            pst.setString(3, email.getText());
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Successfully registered.");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+        if(rxNumber == null||
+        rpassword == null||
+        confirmPassword == null
+        ) {
+            JOptionPane.showMessageDialog(null, "Please Fill All Fields.");
+            return;
         }
-    }
+        else if(rpassword.getText().equals(confirmPassword.getText())){
+            connection = DBUtils.ConnectDb();
+            String sql = "insert into user (username, password, email) values (?,?,?)";
+            try {
+                pst = connection.prepareStatement(sql);
+                pst.setString(1, rxNumber.getText());
+                pst.setString(2, rpassword.getText());
+                pst.setString(3, email.getText());
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "Successfully registered.");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error adding participant: " + ex.getMessage());
+            }
+        }
+        }
+
         @FXML
 private void Login(ActionEvent event){
     connection = DBUtils.ConnectDb();
