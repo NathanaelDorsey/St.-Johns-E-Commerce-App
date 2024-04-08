@@ -11,9 +11,10 @@ public class DBUtils {
     public static Connection ConnectDb(){
     try{
         Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-        JOptionPane.showMessageDialog(null, "Connection Established");
-        return connection;
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS)) {
+            JOptionPane.showMessageDialog(null, "Connection Established");
+            return connection;
+        }
     }catch(Exception e){
     JOptionPane.showMessageDialog(null, e);
     }

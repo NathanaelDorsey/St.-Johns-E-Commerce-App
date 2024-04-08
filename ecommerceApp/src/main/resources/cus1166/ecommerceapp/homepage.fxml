@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.HomepageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.HomepageController">
    <children>
       <VBox prefHeight="100.0" prefWidth="1300.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -30,7 +30,7 @@
                      <children>
                         <ImageView fx:id="searchLogo" fitHeight="25.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../java/images/search.png" />
+                              <Image url="@Images/search.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -43,7 +43,7 @@
                      <children>
                         <ImageView fx:id="stjohnsLogo" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../java/images/StjohnsLogo.png" />
+                              <Image url="@Images/StjohnsLogo.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -53,7 +53,7 @@
                      <children>
                         <ImageView fx:id="userProfileIcon" fitHeight="40.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../java/images/profile.png" />
+                              <Image url="@Images/profile.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -67,7 +67,7 @@
                      <children>
                         <ImageView fx:id="cart" fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../java/images/cart.png" />
+                              <Image url="@Images/cart.png" />
                            </image>
                         </ImageView>
                      </children>
