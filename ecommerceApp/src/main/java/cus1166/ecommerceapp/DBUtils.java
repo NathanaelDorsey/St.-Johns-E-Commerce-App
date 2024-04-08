@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 public class DBUtils {
     public static final String DB_URL = "jdbc:mysql://localhost:3306/eccomercedb";
     public static final String DB_USER = "ForClass";
-    public static final String DB_PASS = "JustForClass";
+    public static final String DB_PASS = "JustForClassss";
     Connection connection = null;
     public static Connection ConnectDb(){
     try{
