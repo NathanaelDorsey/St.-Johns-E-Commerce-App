@@ -101,7 +101,7 @@
                         <ComboBox fx:id="accountType" prefHeight="33.0" prefWidth="241.0" promptText="Choose Type">
                          <items>
                             <FXCollections fx:factory="observableArrayList">
-                               <String fx:value="Admin" />
+                               <String fx:value="Administrator" />
                                <String fx:value="User" />
                             </FXCollections>
                          </items>

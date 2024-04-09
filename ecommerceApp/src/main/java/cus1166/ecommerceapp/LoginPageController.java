@@ -55,7 +55,7 @@ public class LoginPageController implements Initializable {
     private ImageView cart;
 
     @FXML
-    private ComboBox<String> type;
+    private ComboBox<String> accountType;
     @FXML
     private TextField xNumber;
     @FXML
@@ -121,7 +121,6 @@ public class LoginPageController implements Initializable {
             JOptionPane.showMessageDialog(null, "Username and password cannot be empty.");
             return;
         }
-
         String dbUrl, dbUser, dbPass;
         try (InputStream input = DBUtils.class.getClassLoader().getResourceAsStream("config.properties")) {
             Properties prop = new Properties();
@@ -138,13 +137,18 @@ public class LoginPageController implements Initializable {
         }
 
         try (Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPass)) {
-            String accountType = null;
-            if ("user".equals(type.toString())) {
-                accountType = "user";
-            } else if ("admin".equals(type.toString())) {
-                accountType = "administrator";
+            String selectedAccountType = null;
+            if (accountType.getValue() == null) {
+                JOptionPane.showMessageDialog(null, "Please select an account type.");
+                return;
             }
-            String sql = "SELECT * FROM " + accountType + " WHERE username = ? AND password = ?";
+            selectedAccountType = accountType.getValue().toString();
+            if ("user".equals(accountType.toString())) {
+                selectedAccountType = "user";
+            } else if ("admin".equals(accountType.toString())) {
+                selectedAccountType = "administrator";
+            }
+            String sql = "SELECT * FROM " + selectedAccountType + " WHERE username = ? AND password = ?";
             try (PreparedStatement pst = connection.prepareStatement(sql)) {
                 pst.setString(1, xNumber.getText().trim());
                 pst.setString(2, password.getText().trim());
