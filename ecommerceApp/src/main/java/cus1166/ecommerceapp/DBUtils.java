@@ -1,5 +1,5 @@
 package cus1166.ecommerceapp;
-import java.sql.Connection;
+import java.sql.*;
 import java.sql.DriverManager;
 import java.util.Properties;
 import java.io.InputStream;
@@ -20,6 +20,8 @@ public class DBUtils {
             dbUrl = prop.getProperty("db.url");
             dbUser = prop.getProperty("db.user");
             dbPass = prop.getProperty("db.pass");
+            String driverClass = prop.getProperty("db.driverClass");
+            Class.forName(driverClass);
         } catch (Exception e) {
             throw new RuntimeException("Error loading database configuration", e);
         }
@@ -27,7 +29,6 @@ public class DBUtils {
 
     public static Connection ConnectDb() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
             return DriverManager.getConnection(dbUrl, dbUser, dbPass);
         } catch (Exception e) {
             e.printStackTrace();

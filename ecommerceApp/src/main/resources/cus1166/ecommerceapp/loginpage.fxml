@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.LoginPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.LoginPageController">
    <children>
       <VBox prefHeight="100.0" prefWidth="1300.0" style="-fx-background-color: white;">
          <children>
@@ -120,7 +120,7 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="112.0" style="-fx-background-color: #CF102D;" text="Login" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#Login" prefHeight="54.0" prefWidth="112.0" style="-fx-background-color: #CF102D;" text="Login" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -182,7 +182,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="112.0" style="-fx-background-color: #CF102D;" text="Register" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#Register" prefHeight="54.0" prefWidth="112.0" style="-fx-background-color: #CF102D;" text="Register" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
