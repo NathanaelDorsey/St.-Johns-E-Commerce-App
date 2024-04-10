@@ -1,25 +1,38 @@
 package cus1166.ecommerceapp;
-import java.sql.Connection;
+import java.sql.*;
 import java.sql.DriverManager;
-import javax.swing.JOptionPane;
+import java.util.Properties;
+import java.io.InputStream;
 
 public class DBUtils {
-    public static final String DB_URL = "jdbc:mysql://localhost:3306/eccomercedb";
-    public static final String DB_USER = "ForClass";
-    public static final String DB_PASS = "JustForClassss";
-    Connection connection = null;
-    public static Connection ConnectDb(){
-    try{
-        Class.forName("com.mysql.jdbc.Driver");
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS)) {
-            JOptionPane.showMessageDialog(null, "Connection Established");
-            return connection;
+    private static String dbUrl;
+    private static String dbUser;
+    private static String dbPass;
+
+    static {
+        // Load database properties
+        try (InputStream input = DBUtils.class.getClassLoader().getResourceAsStream("config.properties")) {
+            Properties prop = new Properties();
+            if (input == null) {
+                throw new RuntimeException("Unable to find config.properties");
+            }
+            prop.load(input);
+            dbUrl = prop.getProperty("db.url");
+            dbUser = prop.getProperty("db.user");
+            dbPass = prop.getProperty("db.pass");
+            String driverClass = prop.getProperty("db.driverClass");
+            Class.forName(driverClass);
+        } catch (Exception e) {
+            throw new RuntimeException("Error loading database configuration", e);
         }
-    }catch(Exception e){
-    JOptionPane.showMessageDialog(null, e);
     }
 
-        return null;
+    public static Connection ConnectDb() {
+        try {
+            return DriverManager.getConnection(dbUrl, dbUser, dbPass);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-
 }
