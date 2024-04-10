@@ -19,9 +19,11 @@ import javafx.scene.layout.HBox;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.*;
 import java.util.Objects;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class LoginPageController implements Initializable {
@@ -53,7 +55,7 @@ public class LoginPageController implements Initializable {
     private ImageView cart;
 
     @FXML
-    private ComboBox<String> type;
+    private ComboBox<String> accountType;
     @FXML
     private TextField xNumber;
     @FXML
@@ -82,48 +84,93 @@ public class LoginPageController implements Initializable {
 
     @FXML
     private void Register(ActionEvent event) {
-        connection = DBUtils.ConnectDb();
-        String sql = "insert into user (username, password, email) values (?,?,?)";
-        try {
-            pst = connection.prepareStatement(sql);
-            pst.setString(1, rxNumber.getText());
-            pst.setString(2, rpassword.getText());
-            pst.setString(3, email.getText());
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Successfully registered.");
+        if (rxNumber.getText().trim().isEmpty() ||
+                rpassword.getText().trim().isEmpty() ||
+                confirmPassword.getText().trim().isEmpty() ||
+                email.getText().trim().isEmpty() ||
+                !checkbox.isSelected()) {
+
+            JOptionPane.showMessageDialog(null, "Please fill all fields and check the box.");
+        } else if (!rpassword.getText().equals(confirmPassword.getText())) {
+            JOptionPane.showMessageDialog(null, "Passwords do not match.");
+        } else {
+            connection = DBUtils.ConnectDb();
+            if (connection != null) {
+                String sql = "INSERT INTO user (username, password, email) VALUES (?, ?, ?)";
+                try (PreparedStatement pst = connection.prepareStatement(sql)) {
+                    pst.setString(1, rxNumber.getText());
+                    pst.setString(2, rpassword.getText());
+                    pst.setString(3, email.getText());
+                    pst.execute();
+                    JOptionPane.showMessageDialog(null, "Successfully registered.");
+                    stage= (Stage)((Node)event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Error adding user: " + ex.getMessage());
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Error connecting to database.");
+            }
+        }
+    }
+    @FXML
+    private void Login(ActionEvent event) {
+        if (xNumber.getText().trim().isEmpty() || password.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username and password cannot be empty.");
+            return;
+        }
+        String dbUrl, dbUser, dbPass;
+        try (InputStream input = DBUtils.class.getClassLoader().getResourceAsStream("config.properties")) {
+            Properties prop = new Properties();
+            if (input == null) {
+                throw new RuntimeException("Unable to find config.properties");
+            }
+            prop.load(input);
+            dbUrl = prop.getProperty("db.url");
+            dbUser = prop.getProperty("db.user");
+            dbPass = prop.getProperty("db.pass");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error loading database configuration: " + e.getMessage());
+            return;
+        }
+
+        try (Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPass)) {
+            String selectedAccountType = null;
+            if (accountType.getValue() == null) {
+                JOptionPane.showMessageDialog(null, "Please select an account type.");
+                return;
+            }
+            selectedAccountType = accountType.getValue().toString();
+            if ("user".equals(accountType.toString())) {
+                selectedAccountType = "user";
+            } else if ("admin".equals(accountType.toString())) {
+                selectedAccountType = "administrator";
+            }
+            String sql = "SELECT * FROM " + selectedAccountType + " WHERE username = ? AND password = ?";
+            try (PreparedStatement pst = connection.prepareStatement(sql)) {
+                pst.setString(1, xNumber.getText().trim());
+                pst.setString(2, password.getText().trim());
+                try (ResultSet rs = pst.executeQuery()) {
+                    if (rs.next()) {
+                        JOptionPane.showMessageDialog(null, "Successfully logged in.");
+                        Parent root = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Invalid username or password.");
+                    }
+                }
+            }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error connecting to database: " + e.getMessage());
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error loading FXML: " + e.getMessage());
         }
     }
-        @FXML
-private void Login(ActionEvent event){
-    connection = DBUtils.ConnectDb();
-    String accountType = null;
-    if (Objects.equals(type.toString(), "user")){
-    accountType = "user";
-    }else if(Objects.equals(type.toString(), "admin")){
-        accountType = "administrator";
-    }
-        String sql = "select * from" + accountType + "where username =? and password =?";
-    try {
-        pst = connection.prepareStatement(sql);
-        pst.setString(1, xNumber.getText());
-        pst.setString(2, password.getText());
-        rs = pst.executeQuery();
-        if (rs.next()) {
-            JOptionPane.showMessageDialog(null, "Successfully logged in.");
-            Parent root = FXMLLoader.load(getClass().getResource("homepage.fxml"));
-            stage= (Stage)((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }else{
-            JOptionPane.showMessageDialog(null, "Invalid username or password.");
-        }
-    }catch(Exception e){
-        JOptionPane.showMessageDialog(null, e.getMessage());
-    }
-}
     public void switchToLoginPage(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("loginpage.fxml"));
         stage= (Stage)((Node)event.getSource()).getScene().getWindow();
