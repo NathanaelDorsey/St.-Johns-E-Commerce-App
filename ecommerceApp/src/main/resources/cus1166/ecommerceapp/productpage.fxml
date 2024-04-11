@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cartpage">
+   <children>
+      <Accordion />
+      <HBox layoutX="8.0" layoutY="11.0" prefHeight="31.0" prefWidth="91.0">
+         <children>
+            <Label fx:id="home" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="57.0" text="Home" />
+         </children></HBox>
+      <ImageView fx:id="searchLogo" fitHeight="26.0" fitWidth="39.0" layoutX="228.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/search.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="searchbar" layoutX="267.0" layoutY="13.0" prefHeight="26.0" prefWidth="181.0" promptText="Search" />
+      <Label fx:id="categories" alignment="CENTER_RIGHT" layoutX="99.0" layoutY="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="78.0" text="Categories" />
+      <ImageView fx:id="stjohnsLogo" fitHeight="83.0" fitWidth="147.0" layoutX="577.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/StjohnsLogo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="userProfileIcon" fitHeight="31.0" fitWidth="39.0" layoutX="1111.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/profile.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="username" alignment="CENTER" layoutX="1142.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="100.0" text="Login/Register" />
+      <ImageView fx:id="cart" fitHeight="45.0" fitWidth="39.0" layoutX="1247.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/cart.png" />
+         </image>
+      </ImageView>
+      <HBox fx:id="box" alignment="CENTER" layoutX="67.0" layoutY="127.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="243.0" prefWidth="442.0" spacing="15.0">
+         <children>
+            <ImageView fx:id="productImage" fitHeight="243.0" fitWidth="267.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../java/images/shirt.png" />
+               </image>
+            </ImageView>
+            <VBox prefHeight="243.0" prefWidth="158.0">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="158.0" text="Product Name">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Distrlbutor" />
+                  <Label fx:id="rating" layoutX="10.0" layoutY="86.0" prefHeight="25.0" prefWidth="184.0" text="Rating: ">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox layoutX="99.0" layoutY="400.0" prefHeight="376.0" prefWidth="1102.0">
+         <children>
+            <Label prefHeight="45.0" prefWidth="300.0" text="Similar Products">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="174.0" prefWidth="1102.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ImageView fitHeight="90.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label text="Product Name">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Distrlbutor" />
+                        <Label text="Rating: " />
+                        <Label text="\$ " textFill="#2600ff" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ImageView fitHeight="90.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label text="Product Name">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Distrlbutor" />
+                        <Label text="Rating: " />
+                        <Label text="\$ " textFill="#5500ff" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ImageView fitHeight="90.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label text="Product Name">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Distrlbutor" />
+                        <Label text="Rating: " />
+                        <Label text="\$ " textFill="#2f00ff" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ImageView fitHeight="90.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label text="Product Name">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Distrlbutor" />
+                        <Label text="Rating: " />
+                        <Label text="\$ " textFill="#3502ff" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ImageView fitHeight="90.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label text="Product Name">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Distrlbutor" />
+                        <Label text="Rating: " />
+                        <Label text="\$ " textFill="#3300ff" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ImageView fitHeight="90.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label text="Product Name">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Distrlbutor" />
+                        <Label text="Rating: " />
+                        <Label text="\$ " textFill="#1100ff" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Reviews:">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="26.0" prefWidth="1102.0">
+                     <children>
+                        <ImageView fx:id="userProfileIcon1" fitHeight="23.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/profile.png" />
+                           </image>
+                        </ImageView>
+                        <Label prefHeight="20.0" prefWidth="2.0" text="  ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="20.0" prefWidth="73.0" text="Username">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label text="Rating: ">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Date">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="14.0" prefWidth="1012.0" text="If you're looking for randomparagraphs, you've come to the right place. When a random word or a random sentence isn't quite enough, the next logleal step is to find a random paragraph." />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
