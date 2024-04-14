@@ -1,35 +1,52 @@
--- Insert product categories
-INSERT INTO product_category (category_name, parent_category_id)
-VALUES 
-    ('School Supplies', NULL),
-    ('Apparel', NULL),
-    ('Snacks and Beverages', NULL),
-    ('School Spirit Items', NULL),
-    ('Electronics and Accessories', NULL),
-    ('Books and Magazines', NULL),
-    ('Health and Beauty', NULL),
-    ('Gifts and Novelties', NULL),
-    ('School-related Merchandise', NULL),
-    ('Tech Accessories', NULL),
-    ('Art and Craft Supplies', NULL),
-    ('Sports and Fitness Gear', NULL),
-    ('School Memorabilia', NULL);
-
--- Insert subcategories
-INSERT INTO product_category (category_name, parent_category_id)
-VALUES 
-    ('Pens, pencils, erasers', 1),  -- School Supplies subcategory
-    ('Notebooks, binders, folders', 1),  -- School Supplies subcategory
-    ('Rulers, protractors, calculators', 1),  -- School Supplies subcategory
-    ('Highlighters, markers, colored pencils', 1),  -- School Supplies subcategory
-    ('Glue sticks, tape, scissors', 1),  -- School Supplies subcategory
-    ('Index cards, Post-it notes', 1),  -- School Supplies subcategory
-    ('School-branded clothing (t-shirts, hoodies, sweatshirts)', 2),  -- Apparel subcategory
-    ('Uniforms (if applicable)', 2),  -- Apparel subcategory
-    ('Hats, beanies, caps', 2),  -- Apparel subcategory
-    ('Socks, gloves, scarves', 2),  -- Apparel subcategory
-    ('Bottled water, juices, energy drinks', 3),  -- Snacks and Beverages subcategory
-    ('Chips, pretzels, popcorn', 3),  -- Snacks and Beverages subcategory
-    ('Candy, chocolates, gum', 3),  -- Snacks and Beverages subcategory
-    ('Granola bars, trail mix, fruit snacks', 3);  -- Snacks and Beverages subcategory
-    -- Add more subcategories for the remaining categories as needed...
+-- Inserting Categories for the Store
+INSERT INTO Category (category_name) VALUES
+    ('Pens, pencils, erasers'),
+    ('Notebooks, binders, folders'),
+    ('Rulers, protractors, calculators'),
+    ('Highlighters, markers, colored pencils'),
+    ('Glue sticks, tape, scissors'),
+    ('Index cards, Post-it notes'),
+    ('School-branded clothing (t-shirts, hoodies, sweatshirts)'),
+    ('Uniforms (if applicable)'),
+    ('Hats, beanies, caps'),
+    ('Socks, gloves, scarves'),
+    ('Bottled water, juices, energy drinks'),
+    ('Chips, pretzels, popcorn'),
+    ('Candy, chocolates, gum'),
+    ('Granola bars, trail mix, fruit snacks'),
+    ('Pom-poms, foam fingers'),
+    ('Megaphones, banners, flags'),
+    ('Temporary tattoos, face paint'),
+    ('Noise-makers, spirit bells'),
+    ('Earphones, headphones'),
+    ('USB drives, memory cards'),
+    ('Phone chargers, power banks'),
+    ('Laptop sleeves, screen protectors'),
+    ('Textbooks, study guides'),
+    ('Fiction and non-fiction books'),
+    ('Magazines, comics'),
+    ('Hand sanitizer, tissues'),
+    ('Lip balm, moisturizer'),
+    ('Hairbrushes, combs'),
+    ('Basic first aid supplies'),
+    ('Greeting cards, gift wrap'),
+    ('Keychains, magnets'),
+    ('Stickers, patches'),
+    ('Small toys, plushies'),
+    ('Yearbooks, class rings'),
+    ('Graduation caps and gowns'),
+    ('Prom tickets, dance tickets'),
+    ('Fundraising items (e.g., cookie dough, coupon books)'),
+    ('Laptop cases, sleeves'),
+    ('Mouse pads, screen wipes'),
+    ('USB hubs, cables'),
+    ('Sketchbooks, drawing pencils'),
+    ('Paints, brushes, canvases'),
+    ('Craft kits, DIY projects'),
+    ('Team jerseys, uniforms'),
+    ('Water bottles, sports drinks'),
+    ('Exercise bands, jump ropes'),
+    ('Athletic tape, sweatbands'),
+    ('Photos, frames'),
+    ('Plaques, trophies'),
+    ('School emblems, crests');
