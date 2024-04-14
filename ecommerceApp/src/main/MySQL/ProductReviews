@@ -1,0 +1,146 @@
+-- Reviews for Textbook - Biology 101 (product_id = 1)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (1, 1, 4.5, 'Great textbook! Comprehensive and well-explained.'),
+       (2, 1, 4.2, 'Informative content, but a bit dense.'),
+       (3, 1, 4.8, 'Excellent textbook for beginners.'),
+       (4, 1, 4.0, 'Good reference book for biology students.'),
+       (5, 1, 5.0, 'Absolutely love this biology textbook!');
+
+-- Reviews for Mechanical Pencils (Pack of 5) (product_id = 2)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (6, 2, 4.3, 'Decent mechanical pencils, good value for money.'),
+       (7, 2, 4.5, 'Writes smoothly, erasers are effective.'),
+       (8, 2, 3.8, 'Average quality, some pencils broke easily.'),
+       (9, 2, 4.0, 'Handy set of mechanical pencils for school use.');
+
+-- Reviews for Spiral Notebooks (Set of 3) (product_id = 3)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (10, 3, 4.7, 'High-quality spiral notebooks, great for note-taking.'),
+       (11, 3, 4.9, 'Love these notebooks, good paper quality.'),
+       (8, 3, 4.5, 'Sturdy covers, pages don\'t tear easily.');
+
+-- Reviews for Scientific Calculator (product_id = 4)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (1, 4, 4.6, 'Reliable calculator, all necessary functions.'),
+       (2, 4, 4.2, 'Good value for money, a bit bulky.'),
+       (3, 4, 4.8, 'Great calculator for science courses.'),
+       (4, 4, 4.5, 'Easy to use, accurate calculations.'),
+       (5, 4, 5.0, 'Best scientific calculator I\'ve used!');
+
+-- Reviews for University Hoodie (product_id = 5)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (9, 5, 4.5, 'Comfortable hoodie, good quality material.'),
+       (10, 5, 4.8, 'Love the design and fit of this hoodie.'),
+       (11, 5, 4.2, 'Nice school-branded hoodie, runs slightly small.');
+
+-- Reviews for School Uniform Polo Shirt (product_id = 6)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (8, 6, 4.0, 'Decent quality polo shirt for school uniform.'),
+       (1, 6, 3.8, 'Fabric is okay, but wrinkles easily.'),
+       (2, 6, 4.5, 'Fits well and comfortable for everyday wear.');
+
+-- Reviews for Beanie Hat (product_id = 7)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (3, 7, 4.5, 'Warm and stylish beanie hat, good for cold days.'),
+       (4, 7, 4.2, 'Nice beanie, color is slightly different from photo.'),
+       (5, 7, 4.0, 'Comfortable fit, keeps my head warm.');
+
+-- Reviews for Assorted Juice Pack (8-Pack) (product_id = 8)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (6, 8, 4.3, 'Tasty variety of juices, good for school lunches.'),
+       (7, 8, 4.6, 'Love the assortment of flavors in this juice pack.'),
+       (8, 8, 3.9, 'Some flavors are too sweet for my liking.');
+
+-- Reviews for Classic Potato Chips (Family Size) (product_id = 9)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (9, 9, 4.7, 'Delicious classic potato chips, perfect for snacks.'),
+       (10, 9, 4.4, 'Crunchy and flavorful chips, great for movie nights.');
+
+-- Reviews for Gourmet Chocolate Assortment (product_id = 10)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (11, 10, 4.8, 'Premium chocolates, excellent assortment of flavors.'),
+       (8, 10, 4.9, 'High-quality chocolates, beautifully packaged.');
+
+-- Reviews for Foam Finger - Red (product_id = 11)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (1, 11, 4.5, 'Fun foam finger for cheering at school events.'),
+       (2, 11, 4.0, 'Decent quality foam finger, good for school spirit.');
+
+-- Reviews for Megaphone - Blue (product_id = 12)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (3, 12, 4.2, 'Loud and clear megaphone, great for rallies.'),
+       (4, 12, 4.5, 'Nice design, easy to use.');
+
+-- Reviews for Temporary Tattoos (Pack of 20) (product_id = 13)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (5, 13, 4.0, 'Fun temporary tattoos, good for school events.'),
+       (6, 13, 3.8, 'Some tattoos are not very adhesive.');
+
+-- Reviews for Bluetooth Earphones (product_id = 14)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (7, 14, 4.7, 'Excellent sound quality, comfortable fit.'),
+       (8, 14, 4.5, 'Wireless earphones work well, good battery life.');
+
+-- Reviews for USB Flash Drive (64GB) (product_id = 15)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (9, 15, 4.6, 'Fast USB flash drive, ample storage space.'),
+       (10, 15, 4.8, 'Reliable and sturdy USB drive, great for schoolwork.');
+
+-- Reviews for Laptop Sleeve (15-inch) (product_id = 16)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (11, 16, 4.4, 'Slim and protective laptop sleeve, good quality material.'),
+       (8, 16, 4.5, 'Fits my laptop perfectly, lightweight and durable.');
+
+-- Reviews for Biology 101 Textbook (product_id = 17)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (1, 17, 4.5, 'Great textbook! Comprehensive and well-explained.'),
+       (2, 17, 4.2, 'Informative content, but a bit dense.'),
+       (3, 17, 4.8, 'Excellent textbook for beginners.');
+
+-- Reviews for The Great Gatsby (Paperback) (product_id = 18)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (4, 18, 4.6, 'Classic novel, well-written and engaging.'),
+       (5, 18, 4.9, 'Love this book, a must-read.');
+
+-- Reviews for National Geographic Magazine Subscription (product_id = 19)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (6, 19, 4.7, 'Informative and visually stunning magazine.'),
+       (7, 19, 4.5, 'Enjoy reading National Geographic every month.');
+
+-- Reviews for Hand Sanitizer (8 oz) (product_id = 20)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (8, 20, 4.4, 'Effective hand sanitizer, convenient size.'),
+       (9, 20, 4.2, 'Good for on-the-go hygiene.');
+
+-- Reviews for Lip Balm Assortment (Pack of 3) (product_id = 21)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (10, 21, 4.5, 'Moisturizing lip balms, nice variety of flavors.'),
+       (11, 21, 4.8, 'Keeps lips hydrated and soft.');
+
+-- Reviews for Detangling Hairbrush (product_id = 22)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (8, 22, 4.0, 'Gentle on hair, reduces tangles effectively.');
+
+-- Reviews for Assorted Greeting Cards (Pack of 8) (product_id = 23)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (1, 23, 4.5, 'Nice variety of greeting cards, good quality paper.'),
+       (2, 23, 4.2, 'Perfect for different occasions.');
+
+-- Reviews for Magnetic Keychain (product_id = 24)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (3, 24, 4.0, 'Strong magnetic keychain, holds well.');
+
+-- Reviews for Sticker Pack - School Mascot (product_id = 25)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (4, 25, 4.2, 'Cool stickers, great for decorating.');
+
+-- Reviews for Yearbook 2022 (product_id = 26)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (5, 26, 4.7, 'Beautiful yearbook with great photos and memories.'),
+       (6, 26, 4.5, 'Nice compilation of events and highlights.');
+
+-- Reviews for Class Ring - Gold (product_id = 27)
+INSERT INTO Product_Review (user_id, product_id, rating, review_text)
+VALUES (7, 27, 4.8, 'Love my class ring, beautiful design and customization.'),
+       (8, 27, 4.9, 'Great quality class ring, highly recommended.');
+
