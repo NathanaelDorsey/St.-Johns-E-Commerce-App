@@ -10,6 +10,8 @@ public class User{
     private String address;
     private int phone;
 
+    private boolean is_admin;
+
     public int getUserId() {
         return userId;
     }

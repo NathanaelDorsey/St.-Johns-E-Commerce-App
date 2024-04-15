@@ -121,41 +121,39 @@ public class LoginPageController implements Initializable {
             JOptionPane.showMessageDialog(null, "Username and password cannot be empty.");
             return;
         }
-        String dbUrl, dbUser, dbPass;
-        try (InputStream input = DBUtils.class.getClassLoader().getResourceAsStream("config.properties")) {
-            Properties prop = new Properties();
-            if (input == null) {
-                throw new RuntimeException("Unable to find config.properties");
-            }
-            prop.load(input);
-            dbUrl = prop.getProperty("db.url");
-            dbUser = prop.getProperty("db.user");
-            dbPass = prop.getProperty("db.pass");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error loading database configuration: " + e.getMessage());
-            return;
-        }
 
-        try (Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPass)) {
-            String selectedAccountType = null;
+        connection = DBUtils.ConnectDb();
+        try {
+            String sql = ""; // Initialize to empty as a fallback
             if (accountType.getValue() == null) {
                 JOptionPane.showMessageDialog(null, "Please select an account type.");
                 return;
             }
-            selectedAccountType = accountType.getValue().toString();
-            if ("user".equals(accountType.toString())) {
-                selectedAccountType = "user";
-            } else if ("admin".equals(accountType.toString())) {
+
+            String selectedAccountType = accountType.getValue().toString();
+            System.out.println("Selected Account Type: " + selectedAccountType); // For debugging
+
+            if ("user".equals(selectedAccountType)) {
+                sql = "SELECT * FROM user WHERE username = ? AND password = ?";
+            } else if ("Administrator".equals(selectedAccountType)) {
+                sql = "SELECT * FROM user WHERE username = ? AND password = ? AND is_admin = 1";
                 selectedAccountType = "administrator";
             }
-            String sql = "SELECT * FROM " + selectedAccountType + " WHERE username = ? AND password = ?";
+
+            if (sql.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No SQL query is set for the selected account type.");
+                return; // Exit if no SQL query is set to prevent the empty SQL string error
+            }
+
             try (PreparedStatement pst = connection.prepareStatement(sql)) {
                 pst.setString(1, xNumber.getText().trim());
                 pst.setString(2, password.getText().trim());
                 try (ResultSet rs = pst.executeQuery()) {
                     if (rs.next()) {
                         JOptionPane.showMessageDialog(null, "Successfully logged in.");
-                        Parent root = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+                        if (selectedAccountType == "administrator") {
+                             root = FXMLLoader.load(getClass().getResource("Admins/homepageadmin.fxml"));
+                        }else{root = FXMLLoader.load(getClass().getResource("homepage.fxml"));}
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);
                         stage.setScene(scene);
@@ -172,14 +170,14 @@ public class LoginPageController implements Initializable {
         }
     }
     public void switchToLoginPage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("loginpage.fxml"));
+        root = FXMLLoader.load(getClass().getResource("loginpage.fxml"));
         stage= (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
     public void switchToTosPage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("tospage.fxml"));
+        root = FXMLLoader.load(getClass().getResource("tospage.fxml"));
         stage= (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

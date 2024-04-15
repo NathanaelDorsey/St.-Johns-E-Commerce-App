@@ -7,7 +7,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import models.Product;
 
-import java.util.Objects;
+import java.io.File;
+import java.net.URL;
+import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProductController {
 
@@ -19,15 +23,33 @@ public class ProductController {
     private HBox box;
     @FXML
     private Label price;
-
     @FXML
     private Label rating;
-public void setData(Product product){
-    Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(product.getImageSrc())));
 
-    productImage.setImage(image);
-    productName.setText(product.getProductName());
-    price.setText(String.valueOf(product.getPrice()));
-    rating.setText(String.valueOf(product.getRating()));
-}
+    private String imagePath;
+    private static final Logger LOGGER = Logger.getLogger(ProductController.class.getName());
+
+    public void setData(Product product) {
+        try {
+            imagePath = "/cus1166/ecommerceapp/Images/" + (new File(product.getImageSrc()));
+
+            // Construct the proper resource path
+            LOGGER.log(Level.INFO, "Attempting to load image from path: {0}", imagePath);
+
+            if (imagePath == null) {
+                LOGGER.log(Level.WARNING, "Image resource not found at path: {0}", imagePath);
+                productImage.setImage(new Image("/cus1166/ecommerceapp/Images/shirt.png"));
+            } else {
+                Image image = new Image(imagePath);
+                productImage.setImage(image);
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Failed to load image for product: {0}", e.getMessage());
+            productImage.setImage(new Image("/cus1166/ecommerceapp/Images/shirt.png"));
+        }
+    }
+
+    public ImageView getProductImage() {
+        return productImage;
+    }
 }
