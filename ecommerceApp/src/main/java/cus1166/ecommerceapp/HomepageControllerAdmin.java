@@ -1,6 +1,5 @@
 package cus1166.ecommerceapp;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,7 +17,6 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static cus1166.ecommerceapp.ProductController.LOGGER;
 
 public class HomepageControllerAdmin {
 
