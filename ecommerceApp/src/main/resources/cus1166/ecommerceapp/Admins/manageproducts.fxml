@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" styleClass="white-background" stylesheets="@../CSS/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.ManageProductController">
+   <children>
+      <VBox prefHeight="100.0" prefWidth="1300.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" stylesheets="@../CSS/style.css">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Hyperlink fx:id="home" alignment="CENTER" onAction="#switchToHomepage" prefHeight="111.0" prefWidth="110.0" styleClass="mouse-moved" text="Home" visited="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Hyperlink fx:id="categories" alignment="CENTER" prefHeight="106.0" prefWidth="107.0" styleClass="mouse-moved" text="Categories" visited="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="250.0">
+                     <children>
+                        <TextField fx:id="searchbar" prefHeight="32.0" prefWidth="222.0" promptText="Search" />
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
+                           <children>
+                              <Button fx:id="searchLogo" mnemonicParsing="false" onAction="#switchToSearchPage" opacity="0.5" styleClass="white-background">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Images/search.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="SPACER1" prefHeight="100.0" prefWidth="120.0" />
+                  <HBox alignment="CENTER" layoutX="310.0" layoutY="10.0" prefHeight="100.0" prefWidth="138.0">
+                     <children>
+                        <ImageView fx:id="stjohnsLogo" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/StjohnsLogo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="SPACER" prefHeight="100.0" prefWidth="165.0" />
+                  <HBox prefHeight="100.0" prefWidth="116.0">
+                     <children>
+                        <Hyperlink fx:id="manageusers" alignment="CENTER" onAction="#switchToManageUsersPage" prefHeight="100.0" prefWidth="143.0" styleClass="mouse-moved" text="Manage Users" visited="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="936.0" layoutY="10.0" prefHeight="100.0" prefWidth="118.0">
+                     <children>
+                        <Hyperlink fx:id="addproducts" alignment="CENTER" onAction="#switchToAddProductsPage" prefHeight="111.0" prefWidth="110.0" styleClass="mouse-moved" text="Add Products" visited="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Hyperlink fx:id="manageproducts" alignment="CENTER" onAction="#switchToManageProductsPage" prefHeight="100.0" prefWidth="115.0" text="Manage Products" visited="true" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="mouse-moved" />
+                              <String fx:value="selected" />
+                           </styleClass>
+                        </Hyperlink>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="60.0" styleClass="mouse-moved">
+                     <children>
+                        <Button fx:id="userProfileIcon" mnemonicParsing="false">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Images/profile.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="white-background" />
+                              <String fx:value="mouse-moved" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
+                     <children>
+                        <Button fx:id="cart" mnemonicParsing="false">
+                           <graphic>
+                              <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Images/cart.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="white-background" />
+                              <String fx:value="mouse-moved" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="-1.0" layoutY="100.0" prefHeight="216.0" prefWidth="650.0">
+         <children>
+            <AnchorPane prefHeight="219.0" prefWidth="650.0">
+               <children>
+                  <Button fx:id="categoriesbtn" layoutX="384.0" layoutY="135.0" mnemonicParsing="false" onAction="#switchTableType" prefHeight="54.0" prefWidth="232.0" style="-fx-background-color: #CF102D;" text="Categories" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </Button>
+                  <Label alignment="CENTER" layoutX="4.0" prefHeight="110.0" prefWidth="650.0" text="Select Table">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="productsbtn" layoutX="34.0" layoutY="135.0" mnemonicParsing="false" onAction="#switchTableType" prefHeight="54.0" prefWidth="232.0" style="-fx-background-color: #CF102D;" text="Products" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <VBox layoutX="650.0" layoutY="100.0" prefHeight="216.0" prefWidth="650.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="223.0" prefWidth="650.0">
+               <children>
+                  <Button fx:id="savebtn" mnemonicParsing="false" onAction="#handleSaveAction" prefHeight="56.0" prefWidth="181.0" style="-fx-background-color: #CF102D;" text="Save" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <HBox.margin>
+                        <Insets left="4.0" right="4.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="updatebtn" mnemonicParsing="false" onAction="#openEditDialog" prefHeight="56.0" prefWidth="181.0" style="-fx-background-color: #CF102D;" text="Update" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <HBox.margin>
+                        <Insets left="4.0" right="4.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="deletebtn" mnemonicParsing="false" onAction="#handleDeleteAction" prefHeight="56.0" prefWidth="181.0" style="-fx-background-color: #CF102D;" text="Delete" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <HBox.margin>
+                        <Insets left="4.0" right="4.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutY="330.0" prefHeight="471.0" prefWidth="901.0">
+         <children>
+            <TableView fx:id="tableView" fixedCellSize="1.0" prefHeight="471.0" prefWidth="893.0">
+               <columns>
+                  <TableColumn fx:id="colID" prefWidth="124.0" text="ID">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="id" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="colName" prefWidth="776.0" text="Name">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="table_name" />
+                     </cellValueFactory>
+                  </TableColumn>
+               </columns>
+            </TableView>
+         </children>
+      </VBox>
+      <AnchorPane layoutX="901.0" layoutY="330.0" prefHeight="471.0" prefWidth="400.0">
+         <children>
+            <VBox prefHeight="100.0" prefWidth="400.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="labelProductName" alignment="CENTER" prefHeight="100.0" prefWidth="400.0" text="Product Name" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox layoutY="371.0" prefHeight="100.0" prefWidth="400.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="labelProductPrice" alignment="CENTER" prefHeight="111.0" prefWidth="200.0" text="Price">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelStockStatus" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="111.0" prefWidth="200.0" text="Stock Status">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox layoutY="100.0" prefHeight="271.0" prefWidth="400.0">
+               <children>
+                  <ImageView fx:id="productImageView" fitHeight="271.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

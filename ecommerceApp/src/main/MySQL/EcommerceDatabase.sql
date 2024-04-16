@@ -4,101 +4,93 @@ CREATE SCHEMA IF NOT EXISTS ecommercedatabase;
 -- Use the newly created schema
 USE ecommercedatabase;
 
--- Create the tables within the ecommercedatabase schema
-CREATE TABLE `administrator` (
-                                 `admin_id` INT NOT NULL AUTO_INCREMENT,
-                                 `username` VARCHAR(45) DEFAULT NULL,
-                                 `password` VARCHAR(45) DEFAULT NULL,
-                                 PRIMARY KEY (`admin_id`)
+-- Table: User
+CREATE TABLE User (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone_number VARCHAR(20),
+    address TEXT,
+    is_admin BOOLEAN DEFAULT FALSE
 );
 
-CREATE TABLE `orders` (
-                          `order_id` INT NOT NULL AUTO_INCREMENT,
-                          `user_id` INT NOT NULL,
-                          `status` VARCHAR(45) DEFAULT NULL,
-                          `date_ordered` DATETIME DEFAULT NULL,
-                          `total_price` DECIMAL(10, 2) DEFAULT NULL,
-                          PRIMARY KEY (`order_id`)
+-- Table: Product
+CREATE TABLE Product (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2) NOT NULL,
+    rating DECIMAL(3, 1),
+    stock_status ENUM('In Stock', 'Out of Stock') NOT NULL,
+    image_data BLOB
 );
 
-CREATE TABLE `order_item` (
-                              `order_number` INT NOT NULL,
-                              `product_id` INT NOT NULL,
-                              `quantity` INT DEFAULT NULL,
-                              `subtotal` DECIMAL(10, 2) DEFAULT NULL,
-                              PRIMARY KEY (`order_number`)
+-- Table: Category
+CREATE TABLE Category (
+    category_id INT PRIMARY KEY AUTO_INCREMENT,
+    category_name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE `product` (
-                           `product_id` INT NOT NULL AUTO_INCREMENT,
-                           `name` VARCHAR(100) DEFAULT NULL,
-                           `description` TEXT,
-                           `price` DECIMAL(10, 2) DEFAULT NULL,
-                           `rating` FLOAT DEFAULT NULL,
-                           `stock_status` VARCHAR(45) DEFAULT NULL,
-                           PRIMARY KEY (`product_id`)
+-- Table: Product_Category
+CREATE TABLE Product_Category (
+    product_id INT,
+    category_id INT,
+    PRIMARY KEY (product_id, category_id),
+    FOREIGN KEY (product_id) REFERENCES Product(product_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES Category(category_id) ON DELETE CASCADE
 );
 
-
-
-CREATE TABLE `product_category` (
-                                    `category_id` INT NOT NULL AUTO_INCREMENT,
-                                    `category_name` VARCHAR(45) DEFAULT NULL,
-                                    `parent_category_id` INT DEFAULT NULL,
-                                    PRIMARY KEY (`category_id`),
-                                    FOREIGN KEY (`parent_category_id`) REFERENCES `product_category`(`category_id`)
-);
-CREATE TABLE `product_categorization` (
-                                          `product_id` INT NOT NULL,
-                                          `category_id` INT NOT NULL,
-                                          PRIMARY KEY (`product_id`, `category_id`),
-                                          FOREIGN KEY (`product_id`) REFERENCES `product`(`product_id`),
-                                          FOREIGN KEY (`category_id`) REFERENCES `product_category`(`category_id`)
-);
-CREATE TABLE `user` (
-                        `user_id` INT NOT NULL AUTO_INCREMENT,
-                        `username` VARCHAR(45) DEFAULT NULL,
-                        `password` VARCHAR(45) DEFAULT NULL,
-                        `email` VARCHAR(100) DEFAULT NULL,
-                        `f_name` VARCHAR(45) DEFAULT NULL,
-                        `l_name` VARCHAR(45) DEFAULT NULL,
-                        `address` VARCHAR(255) DEFAULT NULL,
-                        `phone` VARCHAR(45) DEFAULT NULL,
-                        PRIMARY KEY (`user_id`)
-);
-CREATE TABLE `product_review` (
-                                  `product_review_id` INT NOT NULL AUTO_INCREMENT,
-                                  `user_id` INT NOT NULL,
-                                  `product_id` INT NOT NULL,
-                                  `rating` INT DEFAULT NULL,
-                                  `review_text` TEXT,
-                                  PRIMARY KEY (`product_review_id`),
-                                  FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`),
-                                  FOREIGN KEY (`product_id`) REFERENCES `product`(`product_id`)
+-- Table: Order
+CREATE TABLE `Order` (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    status ENUM('Placed', 'Processing', 'Shipped', 'Delivered', 'Cancelled') NOT NULL,
+    date_ordered TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total_price DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE
 );
 
-CREATE TABLE `shipping_information` (
-                                        `ship_id` INT NOT NULL AUTO_INCREMENT,
-                                        `order_id` INT NOT NULL,
-                                        `ship_method` VARCHAR(45) DEFAULT NULL,
-                                        `ship_address` VARCHAR(255) DEFAULT NULL,
-                                        `ship_status` VARCHAR(45) DEFAULT NULL,
-                                        PRIMARY KEY (`ship_id`),
-                                        FOREIGN KEY (`order_id`) REFERENCES `orders`(`order_id`)
+-- Table: Order_Item
+CREATE TABLE Order_Item (
+    order_item_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT,
+    product_id INT,
+    quantity INT NOT NULL,
+    subtotal DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES `Order`(order_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES Product(product_id) ON DELETE CASCADE
 );
 
-CREATE TABLE `transaction` (
-                               `transaction_id` INT NOT NULL AUTO_INCREMENT,
-                               `order_id` INT NOT NULL,
-                               `amount` DECIMAL(10, 2) DEFAULT NULL,
-                               `status` VARCHAR(45) DEFAULT NULL,
-                               `payment_method` VARCHAR(45) DEFAULT NULL,
-                               PRIMARY KEY (`transaction_id`),
-                               FOREIGN KEY (`order_id`) REFERENCES `orders`(`order_id`)
+-- Table: Product_Review
+CREATE TABLE Product_Review (
+    review_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    product_id INT,
+    rating DECIMAL(3, 1) NOT NULL,
+    review_text TEXT,
+    FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES Product(product_id) ON DELETE CASCADE
 );
 
+-- Table: Transaction
+CREATE TABLE Transaction (
+    transaction_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT UNIQUE,
+    amount DECIMAL(10, 2) NOT NULL,
+    status ENUM('Pending', 'Completed', 'Failed') NOT NULL,
+    payment_method VARCHAR(50) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES `Order`(order_id) ON DELETE CASCADE
+);
 
-
--- Insert a new administrator with specific username and password
-INSERT INTO ecommercedatabase.administrator (username, password)
-VALUES ('X03607503', 'BigBoss22');
+-- Table: Shipping_Information
+CREATE TABLE Shipping_Information (
+    ship_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT UNIQUE,
+    ship_method VARCHAR(255) NOT NULL,
+    ship_address TEXT NOT NULL,
+    ship_status ENUM('Processing', 'Shipped', 'Delivered') NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES `Order`(order_id) ON DELETE CASCADE
+);
