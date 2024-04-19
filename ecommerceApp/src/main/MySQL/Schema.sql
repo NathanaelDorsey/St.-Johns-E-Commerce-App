@@ -19,7 +19,7 @@ CREATE TABLE Product (
     price DECIMAL(10, 2) NOT NULL,
     rating DECIMAL(3, 1),
     stock_status ENUM('In Stock', 'Out of Stock') NOT NULL,
-    image_url VARCHAR(255)
+    image_data BLOB
 );
 
 -- Table: Category

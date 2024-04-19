@@ -1,6 +1,5 @@
 package cus1166.ecommerceapp;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,163 +7,182 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import models.Product;
 
-import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import static cus1166.ecommerceapp.ProductController.LOGGER;
+
 
 public class AddProductController implements Initializable {
+    @FXML
+    private HBox SPACER;
+
+    @FXML
+    private Button addcategory;
+
+    @FXML
+    private Hyperlink addproducts;
 
     @FXML
     private AnchorPane anchorpane;
+
     @FXML
-    private ImageView productimagepreview;
+    private Button cart;
+
     @FXML
-    private TextField productname, productprice, productstock;
+    private Hyperlink categories;
+
+    @FXML
+    private Hyperlink home;
+
+    @FXML
+    private Button listitem;
+
+    @FXML
+    private Hyperlink manageproducts;
+
+    @FXML
+    private Hyperlink manageusers;
+
+    @FXML
+    private ComboBox<Product> productStatus;
+
+    @FXML
+    private ComboBox<?> productcategory;
+
     @FXML
     private TextArea productdescription;
+
     @FXML
-    private ComboBox<String> productcategory;
+    private ImageView productimagepreview;
 
-    private Connection connection;
-    private File selectedFile;
-    private static final Logger LOGGER = Logger.getLogger(AddProductController.class.getName());
+    @FXML
+    private TextField productname;
 
-    public List<String> fetchCategories() {
-        List<String> categories = new ArrayList<>();
-        String sql = "SELECT category_name FROM category";
-        try (Connection conn = DBUtils.ConnectDb();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
-                categories.add(rs.getString("category_name"));
-            }
-        } catch (SQLException e) {
-            System.out.println("Error fetching categories: " + e.getMessage());
-        }
-        return categories;
+    @FXML
+    private TextField productprice;
+
+    @FXML
+    private TextField productsize;
+
+    @FXML
+    private Button searchLogo;
+
+    @FXML
+    private TextField searchbar;
+
+    @FXML
+    private ImageView stjohnsLogo;
+
+    @FXML
+    private Button uploadimage;
+
+    @FXML
+    private Button userProfileIcon;
+
+    private String sql = "";
+
+    private Connection conn;
+
+    private PreparedStatement pstmt;
+
+
+
+    public void switchToSearchPage(javafx.event.ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("searchpage.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        productcategory.setItems(FXCollections.observableArrayList(fetchCategories()));
-    }
-
-    public void UploadImageAction(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Upload Image");
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
-
-        File file = fileChooser.showOpenDialog(null);
-        if (file != null) {
-            selectedFile = file;  // Store selected file for later use
-            try {
-                Image image = new Image(file.toURI().toString());
-                productimagepreview.setImage(image);  // Display selected image in ImageView
-            } catch (Exception e) {
-                LOGGER.log(Level.SEVERE, "Error loading image: {0}", e.getMessage());
-            }
-        }
-    }
-
-    private String saveImageToFileSystem(File file) {
-        String destinationPath = "/Images"; // Correct path for the resource directory
-        File destFile = new File(destinationPath, file.getName());
+    public void switchToManageUsersPage(javafx.event.ActionEvent event) {
         try {
-            Files.createDirectories(destFile.getParentFile().toPath());
-            Files.copy(file.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            return destFile.getPath(); // Return the file path for database storage
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Error saving image file: {0}", e.getMessage());
-            return null;
-        }
-    }
-
-    public void AddItemAction(ActionEvent event) {
-        // Error handling for empty fields
-        if (productname.getText().trim().isEmpty() || productcategory.getSelectionModel().isEmpty() || productprice.getText().trim().isEmpty() || productstock.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please fill in all fields.");
-            return;
-        }
-
-        try {
-            connection = DBUtils.ConnectDb();
-            connection.setAutoCommit(false);
-            String sql = "INSERT INTO product (name, price, stock_status, description, rating, image_url) VALUES (?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                pst.setString(1, productname.getText());
-                pst.setDouble(2, Double.parseDouble(productprice.getText()));
-                int stock = Integer.parseInt(productstock.getText().trim());
-                pst.setString(3, stock > 0 ? "In Stock" : "Out of Stock");
-                pst.setString(4, productdescription.getText());
-                pst.setInt(5, 5); // Assuming fixed rating for example
-                pst.setString(6, selectedFile.getName()); // Store image path
-                pst.executeUpdate();
-
-                // Handle the rest of database operations...
-                connection.commit();
-                JOptionPane.showMessageDialog(null, "Successfully added item.");
-            } catch (SQLException e) {
-                connection.rollback();
-                JOptionPane.showMessageDialog(null, "Error adding item: " + e.getMessage());
-            } finally {
-                if (connection != null) connection.setAutoCommit(true);
-            }
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Admins/manageusers.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            LOGGER.info("Switched to Manage Users page successfully.");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error connecting to database.");
+            LOGGER.log(Level.SEVERE, "Failed to switch to Manage Users page", e);
         }
     }
 
-    private int getCategoryId(String categoryName) {
-        String sql = "SELECT category.category_id FROM category WHERE category_name = ?";
-        try (Connection conn = DBUtils.ConnectDb();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, categoryName);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("category_id");
-            }
-        } catch (SQLException e) {
-            System.out.println("Error fetching category ID: " + e.getMessage());
+    public void switchToAddProductsPage(javafx.event.ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Admins/addproducts.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            LOGGER.info("Switched to Add Products page successfully.");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Failed to switch to Add Products page", e);
         }
-        return -1;
     }
 
-    private int getLastInsertedProductId() {
-        String sql = "SELECT LAST_INSERT_ID()";
-        try (Connection conn = DBUtils.ConnectDb();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            System.out.println("Error fetching last inserted product ID: " + e.getMessage());
+    public void switchToManageProductsPage(javafx.event.ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Admins/manageproducts.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            LOGGER.info("Switched to Manage Products page successfully.");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Failed to switch to Manage Products page", e);
         }
-        return -1;
     }
-    public void switchToHomepage(ActionEvent event) throws IOException {
+    public void switchToHomepage(javafx.event.ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Admins/homepageadmin.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
+
+
+
+    public void handleLoadImageAction(ActionEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Select Image");
+        File file = fc.showOpenDialog(null);
+            if (file != null){
+                Image image = new Image(file.toURI().toString());
+                productimagepreview.setImage(image);
+            }
+    }
+
+    public void handleAddCategory(ActionEvent event) {
+
+    }
+
+    public void handleSaveProduct(ActionEvent event) {
+        sql = "INSERT INTO Product (name, description, price, rating, stock_status, image_data) VALUES (?,?,?,?,?,?,?,?)";
+
     }
 }

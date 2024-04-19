@@ -7,9 +7,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import models.Product;
 
-import java.io.File;
-import java.net.URL;
-import java.nio.file.Path;
+import java.io.ByteArrayInputStream;
+
+import java.sql.Blob;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,27 +25,22 @@ public class ProductController {
     private Label price;
     @FXML
     private Label rating;
-
-    private String imagePath;
-    private static final Logger LOGGER = Logger.getLogger(ProductController.class.getName());
+    static final Logger LOGGER = Logger.getLogger(ProductController.class.getName());
 
     public void setData(Product product) {
         try {
-            imagePath = "/cus1166/ecommerceapp/Images/" + (new File(product.getImageSrc()));
+            Blob imageBlob = product.getImageBlob();
+            byte[] imageBytes = imageBlob.getBytes(1, (int) imageBlob.length());
+            Image image = new Image(new ByteArrayInputStream(imageBytes));
+            productImage.setImage(image);
 
-            // Construct the proper resource path
-            LOGGER.log(Level.INFO, "Attempting to load image from path: {0}", imagePath);
+            productName.setText(product.getProductName());
+            price.setText(String.valueOf(product.getPrice()));
+            rating.setText(String.valueOf(product.getRating()));
 
-            if (imagePath == null) {
-                LOGGER.log(Level.WARNING, "Image resource not found at path: {0}", imagePath);
-                productImage.setImage(new Image("/cus1166/ecommerceapp/Images/shirt.png"));
-            } else {
-                Image image = new Image(imagePath);
-                productImage.setImage(image);
-            }
+            LOGGER.log(Level.INFO, "Image loaded successfully for product: {0}", product.getProductName());
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Failed to load image for product: {0}", e.getMessage());
-            productImage.setImage(new Image("/cus1166/ecommerceapp/Images/shirt.png"));
         }
     }
 
