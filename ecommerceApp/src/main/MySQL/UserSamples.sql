@@ -44,42 +44,10 @@ VALUES ('Olivia', 'White', 'X90123456', 'passwordSTU', 'olivia.white@example.com
 INSERT INTO User (first_name, last_name, username, password, email, phone_number, address) 
 VALUES ('Jason', 'Lee', 'X01234567', 'passwordVWX', 'jason.lee@example.com', '6667778888', '808 Maple Ave, Queens, NY');
 
--- User 12
-INSERT INTO User (first_name, last_name, username, password, email, phone_number, address) 
-VALUES ('Sophia', 'Martin', 'X12345678', 'passwordYZA', 'sophia.martin@example.com', '9990001111', '909 Pine St, Brooklyn, NY');
-
--- User 13
-INSERT INTO User (first_name, last_name, username, password, email, phone_number, address) 
-VALUES ('Daniel', 'Garcia', 'X23456789', 'passwordBCD', 'daniel.garcia@example.com', '1112223333', '1010 Elm St, Bronx, NY');
-
--- User 14
-INSERT INTO User (first_name, last_name, username, password, email, phone_number, address) 
-VALUES ('Mia', 'Lopez', 'X34567890', 'passwordEFG', 'mia.lopez@example.com', '4445556666', '1111 Oak St, Manhattan, NY');
-
--- User 15
-INSERT INTO User (first_name, last_name, username, password, email, phone_number, address) 
-VALUES ('Aiden', 'Harris', 'X45678901', 'passwordHIJ', 'aiden.harris@example.com', '7778889999', '1212 Pine St, Staten Island, NY');
-
--- User 16
-INSERT INTO User (first_name, last_name, username, password, email, phone_number, address) 
-VALUES ('Lily', 'King', 'X56789012', 'passwordKLM', 'lily.king@example.com', '2223334444', '1313 Maple Ave, Queens, NY');
-
--- User 17
-INSERT INTO User (first_name, last_name, username, password, email, phone_number, address) 
-VALUES ('Connor', 'Young', 'X67890123', 'passwordNOP', 'connor.young@example.com', '8889990000', '1414 Pine St, Brooklyn, NY');
-
--- User 18
-INSERT INTO User (first_name, last_name, username, password, email, phone_number, address) 
-VALUES ('Victoria', 'Scott', 'X78901234', 'passwordQRS', 'victoria.scott@example.com', '5556667777', '1515 Elm St, Bronx, NY');
-
--- User 19
-INSERT INTO User (first_name, last_name, username, password, email, phone_number, address) 
-VALUES ('Gabriel', 'Nguyen', 'X89012345', 'passwordTUV', 'gabriel.nguyen@example.com', '3334445555', '1616 Oak St, Manhattan, NY');
-
--- User 20
-INSERT INTO User (first_name, last_name, username, password, email, phone_number, address) 
-VALUES ('Natalie', 'Evans', 'X90123456', 'passwordWXY', 'natalie.evans@example.com', '6667778888', '1717 Pine St, Staten Island, NY');
 
 INSERT INTO User (first_name, last_name, username, password, email, phone_number, address, is_admin)
 VALUES ('Gregorios', 'Thomas', 'X03607503', 'GloriousGregorios', 'gregoriosthomas22@gmail.com', '8452692867', '1717 Pine St, Staten Island, NY', 1);
+
+INSERT INTO user (first_name, last_name, username, password, email, phone_number, address, is_admin)
+values ('Nathanael','Dorsey','X03411461','NuacneNate','nathanaeld@gmail.com', 9293333333, '505 Flatbush St, Bronx, NY',1 )
 

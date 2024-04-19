@@ -1,23 +1,47 @@
 package models;
-
-public class User{
+public class User {
     private int userId;
+    private String firstName;
+    private String lastName;
     private String username;
     private String password;
     private String email;
-    private String fName;
-    private String lName;
+    private String phoneNumber;
     private String address;
-    private int phone;
+    private boolean isAdmin;
 
-    private boolean is_admin;
+    // Constructor
+    public User(int userId, String firstName, String lastName, String username, String email) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.email = email;
+    }
 
+    // Getters and setters
     public int getUserId() {
         return userId;
     }
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUsername() {
@@ -44,20 +68,12 @@ public class User{
         this.email = email;
     }
 
-    public String getFName() {
-        return fName;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setFName(String fName) {
-        this.fName = fName;
-    }
-
-    public String getLName() {
-        return lName;
-    }
-
-    public void setLName(String lName) {
-        this.lName = lName;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getAddress() {
@@ -68,11 +84,11 @@ public class User{
         this.address = address;
     }
 
-    public int getPhone() {
-        return phone;
+    public boolean isIsAdmin() {
+        return isAdmin;
     }
 
-    public void setPhone(int phone) {
-        this.phone = phone;
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }

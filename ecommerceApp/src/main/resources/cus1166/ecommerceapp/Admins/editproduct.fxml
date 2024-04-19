@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="cus1166.ecommerceapp.EditProductController"
+            prefHeight="400.0" prefWidth="600.0">
+    <children>
+        <VBox spacing="15" layoutX="20" layoutY="20" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+            <TextField fx:id="nameField" promptText="Enter product name"/>
+            <TextArea fx:id="descriptionField" promptText="Enter description" prefHeight="100.0"/>
+            <TextField fx:id="priceField" promptText="Enter price"/>
+            <ComboBox fx:id="stockStatusCombo" promptText="Select stock status">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="In_Stock"/>
+                        <String fx:value="Out_of_Stock"/>
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <HBox spacing="10">
+                <Button text="Save" onAction="#handleSave"/>
+                <Button text="Cancel" onAction="#handleCancel"/>
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>
