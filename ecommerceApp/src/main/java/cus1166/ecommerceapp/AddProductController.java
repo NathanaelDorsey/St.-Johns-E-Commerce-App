@@ -21,6 +21,8 @@ import java.io.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -63,7 +65,7 @@ public class AddProductController implements Initializable {
     private ComboBox<Product> productStatus;
 
     @FXML
-    private ComboBox<?> productcategory;
+    private ComboBox<String> productcategory;
 
     @FXML
     private TextArea productdescription;
@@ -100,6 +102,28 @@ public class AddProductController implements Initializable {
     private Connection conn;
 
     private PreparedStatement pstmt;
+
+    private void loadCategories() {
+        String query = "SELECT category_name FROM Category";  // Adjust the query according to your database schema
+        try (Connection conn = DBUtils.ConnectDb();  // Make sure you have a utility class to handle the DB connection
+             PreparedStatement pstmt = conn.prepareStatement(query);
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                String categoryName = rs.getString("category_name");
+                productcategory.getItems().add(categoryName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  // Or use a logging framework
+            showAlert("Database Error", "Error fetching categories from the database.");
+        }
+    }
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 
 
 
@@ -160,7 +184,7 @@ public class AddProductController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        loadCategories();
     }
 
 
@@ -178,10 +202,12 @@ public class AddProductController implements Initializable {
 
     public void handleAddCategory(ActionEvent event) {
 
+        loadCategories();
     }
 
     public void handleSaveProduct(ActionEvent event) {
         sql = "INSERT INTO Product (name, description, price, rating, stock_status, image_data) VALUES (?,?,?,?,?,?,?,?)";
 
     }
+
 }
