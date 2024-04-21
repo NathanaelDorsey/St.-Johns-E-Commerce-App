@@ -17,6 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.collections.FXCollections?>
 <AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.AddProductController">
    <children>
       <VBox prefHeight="100.0" prefWidth="1300.0" style="-fx-background-color: white;">
@@ -225,7 +226,14 @@
                               </HBox>
                               <HBox layoutX="32.0" layoutY="109.0" prefHeight="71.0" prefWidth="606.0">
                                  <children>
-                                    <ComboBox fx:id="productStatus" prefHeight="74.0" prefWidth="606.0" promptText="Status" />
+                                    <ComboBox fx:id="productStatus" prefHeight="74.0" prefWidth="606.0" promptText="Status" >
+                                    <items>
+                                       <FXCollections fx:factory="observableArrayList">
+                                          <String fx:value="In_Stock"/>
+                                          <String fx:value="Out_of_Stock"/>
+                                       </FXCollections>
+                                    </items>
+                                    </ComboBox>
                                  </children>
                               </HBox>
                               <HBox layoutX="32.0" layoutY="81.0" prefHeight="71.0" prefWidth="606.0" />
