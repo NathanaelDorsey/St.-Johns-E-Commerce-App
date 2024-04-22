@@ -33,7 +33,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 
-import static cus1166.ecommerceapp.ProductController.LOGGER;
+import static cus1166.ecommerceapp.ManageUserController.LOGGER;
 
 
 public class AddProductController implements Initializable {
@@ -68,7 +68,7 @@ public class AddProductController implements Initializable {
     private Hyperlink manageusers;
 
     @FXML
-    private ComboBox<Product> productStatus;
+    private ComboBox<String> productStatus;
 
     @FXML
     private ComboBox<Category> productcategory;
@@ -302,5 +302,7 @@ public class AddProductController implements Initializable {
             showAlert("Error", "Error linking product to category: " + e.getMessage());
         }
     }
+
+
 
 }

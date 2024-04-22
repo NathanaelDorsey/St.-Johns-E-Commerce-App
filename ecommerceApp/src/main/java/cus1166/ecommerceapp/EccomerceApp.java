@@ -11,7 +11,7 @@ public class EccomerceApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EccomerceApp.class.getResource("loginpage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(EccomerceApp.class.getResource("/cus1166/ecommerceapp/Admins/manageproducts.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1300, 800);
         stage.setTitle("StormMarket");
         stage.setScene(scene);

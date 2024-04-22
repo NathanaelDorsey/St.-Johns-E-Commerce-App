@@ -24,7 +24,7 @@ CREATE TABLE Product (
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
     rating DECIMAL(3, 1),
-    stock_status ENUM('In Stock', 'Out of Stock') NOT NULL,
+    stock_status ENUM('In_Stock', 'Out_of_Stock') NOT NULL,
     image_data BLOB
 );
 
