@@ -11,6 +11,7 @@ module cus1166.ecommerceapp {
     requires eu.hansolo.tilesfx;
     requires java.sql;
     requires java.desktop;
+    requires javafx.swing;
     opens models to javafx.base;
 
     opens cus1166.ecommerceapp to javafx.fxml;

@@ -1,5 +1,6 @@
 package cus1166.ecommerceapp;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,8 @@ import javafx.stage.Stage;
 import models.Product;
 
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.sql.Connection;
@@ -104,8 +107,8 @@ public class AddProductController implements Initializable {
     private PreparedStatement pstmt;
 
     private void loadCategories() {
-        String query = "SELECT category_name FROM Category";  // Adjust the query according to your database schema
-        try (Connection conn = DBUtils.ConnectDb();  // Make sure you have a utility class to handle the DB connection
+        String query = "SELECT category_name FROM Category";
+        try (Connection conn = DBUtils.ConnectDb();
              PreparedStatement pstmt = conn.prepareStatement(query);
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
@@ -113,7 +116,7 @@ public class AddProductController implements Initializable {
                 productcategory.getItems().add(categoryName);
             }
         } catch (SQLException e) {
-            e.printStackTrace();  // Or use a logging framework
+            e.printStackTrace();
             showAlert("Database Error", "Error fetching categories from the database.");
         }
     }
@@ -206,8 +209,31 @@ public class AddProductController implements Initializable {
     }
 
     public void handleSaveProduct(ActionEvent event) {
-        sql = "INSERT INTO Product (name, description, price, rating, stock_status, image_data) VALUES (?,?,?,?,?,?,?,?)";
+        sql = "INSERT INTO Product (name, description, price, rating, stock_status, image_data) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = DBUtils.ConnectDb();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, productname.getText());
+            pstmt.setString(2, productdescription.getText());
+            pstmt.setDouble(3, Double.parseDouble(productprice.getText()));
+            pstmt.setDouble(4, Double.parseDouble("5")); // Assuming a TextField for product rating
+            pstmt.setString(5, String.valueOf(productStatus.getValue()));
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            Image image = productimagepreview.getImage();
+            BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
+            ImageIO.write(bImage, "png", bos);
+            byte[] data = bos.toByteArray();
+            ByteArrayInputStream bis = new ByteArrayInputStream(data);
+            pstmt.setBinaryStream(6, bis, data.length);
 
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows > 0) {
+                showAlert("Success", "Product successfully added.");
+            } else {
+                showAlert("Error", "Failed to add product.");
+            }
+        } catch (SQLException | IOException | NumberFormatException e) {
+            showAlert("Error", "Error occurred: " + e.getMessage());
+        }
     }
 
 }
