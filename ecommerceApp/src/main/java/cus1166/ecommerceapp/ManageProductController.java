@@ -67,7 +67,12 @@ public class ManageProductController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("table_name"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("tableName"));
+        try {
+            showTable();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null && currentType == TableType.PRODUCT) {
                 Tables selectedProduct = (Tables) newSelection;
@@ -217,6 +222,7 @@ public class ManageProductController implements Initializable {
     public void showTable() throws SQLException {
         ObservableList<Tables> list = getTableList();
         tableView.setItems(list);
+        tableView.refresh();
     }
 
     @FXML
@@ -233,7 +239,7 @@ public class ManageProductController implements Initializable {
         String updateQuery = "UPDATE " + tableName + " SET name = ? WHERE " + columnId + " = ?";
         try (Connection conn = DBUtils.ConnectDb();
              PreparedStatement pstmt = conn.prepareStatement(updateQuery)) {
-            pstmt.setString(1, item.getTable_name());
+            pstmt.setString(1, item.getTableName());
             pstmt.setInt(2, item.getId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -295,10 +301,11 @@ public class ManageProductController implements Initializable {
                 int id = rs.getInt(columnId);
                 String name = rs.getString(columnName);
                 list.add(new Tables(id, name));
+                System.out.println("Adding to list: id=" + id + ", name=" + name);
                 rowCount++;
             }
-            tableView.refresh();
             System.out.println("Number of rows fetched: " + rowCount);  // Log the row count
+            System.out.println(list);
         } catch (SQLException e) {
             System.err.println("Error fetching data from the database: " + e.getMessage());
         }

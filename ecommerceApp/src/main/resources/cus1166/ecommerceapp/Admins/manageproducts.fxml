@@ -211,7 +211,7 @@
       </VBox>
       <VBox layoutY="330.0" prefHeight="471.0" prefWidth="901.0">
          <children>
-            <TableView fx:id="tableView" fixedCellSize="1.0" prefHeight="471.0" prefWidth="893.0">
+            <TableView fx:id="tableView" prefHeight="471.0" prefWidth="893.0">
                <columns>
                   <TableColumn fx:id="colID" prefWidth="124.0" text="ID">
                      <cellValueFactory>
@@ -220,7 +220,7 @@
                   </TableColumn>
                   <TableColumn fx:id="colName" prefWidth="776.0" text="Name">
                      <cellValueFactory>
-                        <PropertyValueFactory property="table_name" />
+                        <PropertyValueFactory property="tableName" />
                      </cellValueFactory>
                   </TableColumn>
                </columns>

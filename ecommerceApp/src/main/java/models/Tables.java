@@ -2,17 +2,17 @@ package models;
 
 public class Tables {
     private int id;
-    private String table_name;
+    private String tableName;
 
-    public Tables(int id, String table_name) {
+    public Tables(int id, String tableName) {
         this.id = id;
-        this.table_name = table_name;
+        this.tableName = tableName;
     }
     public int getId() {
         return id;
     }
 
-    public String getTable_name() {
-        return table_name;
+    public String getTableName() {
+        return tableName;
     }
 }
