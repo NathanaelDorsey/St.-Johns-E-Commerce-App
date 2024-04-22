@@ -40,7 +40,7 @@ public class ManageUserController implements Initializable {
     @FXML private Button deletebtn;
 
     public void switchToSearchPage(javafx.event.ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("searchpage.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Productsearch.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

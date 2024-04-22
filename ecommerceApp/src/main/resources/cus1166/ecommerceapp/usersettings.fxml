@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.ManageUserController">
+   <children>
+      <FlowPane layoutX="95.0" layoutY="100.0" prefHeight="700.0" prefWidth="1110.0" style="-fx-border-color: #CF102D; -fx-border-radius: 20px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <VBox prefHeight="526.0" prefWidth="550.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="110.0" prefHeight="100.0" prefWidth="200.0" />
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <VBox blendMode="SRC_ATOP" focusTraversable="true" prefHeight="700.0" prefWidth="550.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+         </children>
+      </FlowPane>
+      <Label fx:id="home" alignment="CENTER_RIGHT" layoutY="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="57.0" text="Home" />
+      <Label fx:id="categories" alignment="CENTER_RIGHT" layoutX="56.0" layoutY="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="78.0" text="Categories" />
+      <ImageView fx:id="searchLogo" fitHeight="26.0" fitWidth="39.0" layoutX="134.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/search.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="searchbar" layoutX="173.0" layoutY="12.0" prefHeight="26.0" prefWidth="181.0" promptText="Search" />
+      <ImageView fx:id="stjohnsLogo" fitHeight="83.0" fitWidth="147.0" layoutX="577.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/StjohnsLogo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="userProfileIcon" fitHeight="31.0" fitWidth="39.0" layoutX="1171.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/profile.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="username" alignment="CENTER" layoutX="1200.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="100.0" text="Login/Register" />
+   </children>
+</AnchorPane>
