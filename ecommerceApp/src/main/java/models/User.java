@@ -10,7 +10,7 @@ public class User {
     private String address;
     private boolean isAdmin;
 
-    // Constructor
+
     public User(int userId, String firstName, String lastName, String username, String email) {
         this.userId = userId;
         this.firstName = firstName;
@@ -19,7 +19,7 @@ public class User {
         this.email = email;
     }
 
-    // Getters and setters
+
     public int getUserId() {
         return userId;
     }

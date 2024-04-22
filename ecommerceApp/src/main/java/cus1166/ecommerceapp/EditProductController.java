@@ -16,7 +16,7 @@ public class EditProductController {
     @FXML private TextField priceField;
     @FXML private ComboBox<String> stockStatusCombo;
 
-    private int productId; // This will be set when the dialog is initialized with data
+    private int productId;
 
     public void initData(int id) {
         this.productId = id;
@@ -37,7 +37,6 @@ public class EditProductController {
             }
         } catch (SQLException e) {
             System.err.println("Error loading product details: " + e.getMessage());
-            // Proper error handling or user notification code should be added here
         }
     }
 
@@ -55,7 +54,6 @@ public class EditProductController {
             closeStage();
         } catch (Exception e) {
             System.err.println("Error updating product: " + e.getMessage());
-            // Proper error handling or user notification code should be added here
         }
     }
     @FXML

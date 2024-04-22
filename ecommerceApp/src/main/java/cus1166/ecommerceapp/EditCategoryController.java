@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class EditCategoryController {
     @FXML private TextField categoryNameField;
 
-    private int categoryId; // This will be set when the dialog is initialized with data
+    private int categoryId;
 
     public void initData(int id) {
         this.categoryId = id;
@@ -29,7 +29,6 @@ public class EditCategoryController {
             }
         } catch (SQLException e) {
             System.err.println("Error loading category details: " + e.getMessage());
-            // Proper error handling or user notification code should be added here
         }
     }
 
@@ -44,7 +43,6 @@ public class EditCategoryController {
             closeStage();
         } catch (Exception e) {
             System.err.println("Error updating category: " + e.getMessage());
-            // Proper error handling or user notification code should be added here
         }
     }
 

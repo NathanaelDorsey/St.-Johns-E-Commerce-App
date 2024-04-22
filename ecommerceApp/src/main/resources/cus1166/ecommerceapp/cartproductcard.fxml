@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="box" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="185.0" prefWidth="400.0" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.ProductController">
+<HBox fx:id="box" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="185.0" prefWidth="400.0" spacing="15.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.ProductController">
    <children>
-      <ImageView fx:id="productImage" fitHeight="155.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../java/images/shirt.png" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="productImage" fitHeight="155.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true" />
       <VBox prefHeight="185.0" prefWidth="320.0">
          <children>
             <Label fx:id="productName" prefHeight="76.0" prefWidth="233.0" text="Product Name">

@@ -10,7 +10,6 @@ public class DBUtils {
     private static String dbPass;
 
     static {
-        // Load database properties
         try (InputStream input = DBUtils.class.getClassLoader().getResourceAsStream("config.properties")) {
             Properties prop = new Properties();
             if (input == null) {

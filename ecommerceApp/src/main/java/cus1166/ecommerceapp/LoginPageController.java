@@ -1,7 +1,5 @@
 package cus1166.ecommerceapp;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,14 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
 import javax.swing.*;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.sql.*;
-import java.util.Objects;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class LoginPageController implements Initializable {
@@ -124,14 +118,14 @@ public class LoginPageController implements Initializable {
 
         connection = DBUtils.ConnectDb();
         try {
-            String sql = ""; // Initialize to empty as a fallback
+            String sql = "";
             if (accountType.getValue() == null) {
                 JOptionPane.showMessageDialog(null, "Please select an account type.");
                 return;
             }
 
             String selectedAccountType = accountType.getValue().toString();
-            System.out.println("Selected Account Type: " + selectedAccountType); // For debugging
+            System.out.println("Selected Account Type: " + selectedAccountType);
 
             if ("user".equals(selectedAccountType)) {
                 sql = "SELECT * FROM user WHERE username = ? AND password = ?";
@@ -142,7 +136,7 @@ public class LoginPageController implements Initializable {
 
             if (sql.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "No SQL query is set for the selected account type.");
-                return; // Exit if no SQL query is set to prevent the empty SQL string error
+                return;
             }
 
             try (PreparedStatement pst = connection.prepareStatement(sql)) {

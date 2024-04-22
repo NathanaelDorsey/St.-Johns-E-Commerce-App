@@ -1,5 +1,7 @@
 package cus1166.ecommerceapp;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import models.Category;
 import models.Product;
 
 
@@ -68,7 +71,7 @@ public class AddProductController implements Initializable {
     private ComboBox<Product> productStatus;
 
     @FXML
-    private ComboBox<String> productcategory;
+    private ComboBox<Category> productcategory;
 
     @FXML
     private TextArea productdescription;
@@ -106,22 +109,55 @@ public class AddProductController implements Initializable {
 
     private PreparedStatement pstmt;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        loadCategories();
+        setupCategoryComboBox();
+    }
+    private void setupCategoryComboBox() {
+        productcategory.setCellFactory((comboBox) -> {
+            return new ListCell<Category>() {
+                @Override
+                protected void updateItem(Category item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setText(null);
+                    } else {
+                        setText(item.getName());
+                    }
+                }
+            };
+        });
+        productcategory.setButtonCell(new ListCell<Category>() {
+            @Override
+            protected void updateItem(Category item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setText(null);
+                } else {
+                    setText(item.getName());
+                }
+            }
+        });
+    }
     private void loadCategories() {
-        String query = "SELECT category_name FROM Category";
+        ObservableList<Category> categories = FXCollections.observableArrayList();
+        String query = "SELECT category_id, category_name FROM Category";
         try (Connection conn = DBUtils.ConnectDb();
              PreparedStatement pstmt = conn.prepareStatement(query);
              ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
+                int categoryId = rs.getInt("category_id");
                 String categoryName = rs.getString("category_name");
-                productcategory.getItems().add(categoryName);
+                categories.add(new Category(categoryId, categoryName));
             }
+            productcategory.setItems(categories);
         } catch (SQLException e) {
-            e.printStackTrace();
             showAlert("Database Error", "Error fetching categories from the database.");
         }
     }
     private void showAlert(String title, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(content);
@@ -185,10 +221,7 @@ public class AddProductController implements Initializable {
     }
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        loadCategories();
-    }
+
 
 
 
@@ -209,30 +242,64 @@ public class AddProductController implements Initializable {
     }
 
     public void handleSaveProduct(ActionEvent event) {
-        sql = "INSERT INTO Product (name, description, price, rating, stock_status, image_data) VALUES (?, ?, ?, ?, ?, ?)";
+        Category selectedCategory = productcategory.getValue();
+        if (selectedCategory == null) {
+            showAlert("Error", "No category selected.");
+            return;
+        }
+
+        String sql = "INSERT INTO Product (name, description, price, rating, stock_status, image_data) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBUtils.ConnectDb();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
             pstmt.setString(1, productname.getText());
             pstmt.setString(2, productdescription.getText());
             pstmt.setDouble(3, Double.parseDouble(productprice.getText()));
-            pstmt.setDouble(4, Double.parseDouble("5")); // Assuming a TextField for product rating
+            pstmt.setDouble(4, 5.0);
             pstmt.setString(5, String.valueOf(productStatus.getValue()));
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            Image image = productimagepreview.getImage();
-            BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
-            ImageIO.write(bImage, "png", bos);
-            byte[] data = bos.toByteArray();
-            ByteArrayInputStream bis = new ByteArrayInputStream(data);
-            pstmt.setBinaryStream(6, bis, data.length);
+
+
+            if (productimagepreview.getImage() != null) {
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                BufferedImage bImage = SwingFXUtils.fromFXImage(productimagepreview.getImage(), null);
+                ImageIO.write(bImage, "png", bos);
+                byte[] data = bos.toByteArray();
+                ByteArrayInputStream bis = new ByteArrayInputStream(data);
+                pstmt.setBinaryStream(6, bis, data.length);
+            } else {
+                pstmt.setBinaryStream(6, null);
+            }
 
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
-                showAlert("Success", "Product successfully added.");
+                try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        int productId = generatedKeys.getInt(1);
+                        linkProductToCategory(productId, selectedCategory.getId());
+                        showAlert("Success", "Product successfully added.");
+                    }
+                }
             } else {
                 showAlert("Error", "Failed to add product.");
             }
-        } catch (SQLException | IOException | NumberFormatException e) {
-            showAlert("Error", "Error occurred: " + e.getMessage());
+        } catch (SQLException e) {
+            showAlert("Database Error", "Error occurred: " + e.getMessage());
+        } catch (IOException e) {
+            showAlert("File Error", "Error processing image: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            showAlert("Input Error", "Please check number inputs: " + e.getMessage());
+        }
+    }
+
+    private void linkProductToCategory(int productId, int categoryId) throws SQLException {
+        String sql = "INSERT INTO product_category (product_id, category_id) VALUES (?, ?)";
+        try (Connection conn = DBUtils.ConnectDb();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, productId);
+            pstmt.setInt(2, categoryId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            showAlert("Error", "Error linking product to category: " + e.getMessage());
         }
     }
 

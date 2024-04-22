@@ -92,25 +92,25 @@ public class ManageProductController implements Initializable {
                 String stockStatus = rs.getString("stock_status");
                 Blob imageBlob = rs.getBlob("image_data");
 
-                // Update UI Elements for name, price, and stock status
+
                 labelProductName.setText("Name: " + (name != null ? name : "N/A"));
                 labelProductPrice.setText("Price: $" + (price != 0 ? String.format("%.2f", price) : "N/A"));
                 labelStockStatus.setText("Stock Status: " + (stockStatus != null ? stockStatus : "N/A"));
 
-                // Check if image data is available before attempting to create an Image
+
                 if (imageBlob != null) {
                     Image image = new Image(imageBlob.getBinaryStream());
                     productImageView.setImage(image);
                 } else {
-                    productImageView.setImage(null);  // Optionally set a default or placeholder image
+                    productImageView.setImage(null);
                 }
             }
         } catch (SQLException e) {
             System.err.println("Database error: " + e.getMessage());
-            clearProductDetails();  // A method to clear all fields
+            clearProductDetails();
         } catch (Exception e) {
             System.err.println("Error loading image from database: " + e.getMessage());
-            productImageView.setImage(null);  // Optionally set a default or placeholder image
+            productImageView.setImage(null);
         }
     }
 
@@ -118,7 +118,7 @@ public class ManageProductController implements Initializable {
         labelProductName.setText("Name: N/A");
         labelProductPrice.setText("Price: N/A");
         labelStockStatus.setText("Stock Status: N/A");
-        productImageView.setImage(null);  // Clear or set a default image
+        productImageView.setImage(null);
     }
     public void switchToSearchPage(javafx.event.ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("searchpage.fxml")));
@@ -193,7 +193,7 @@ public class ManageProductController implements Initializable {
     @FXML
     void openEditDialog(javafx.event.ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() == null) {
-            return; // No selection, handle as necessary
+            return;
         }
         try {
             Tables selected = tableView.getSelectionModel().getSelectedItem();
@@ -251,12 +251,11 @@ public class ManageProductController implements Initializable {
     void handleDeleteAction(javafx.event.ActionEvent event) {
         Tables selectedItem = tableView.getSelectionModel().getSelectedItem();
         if (selectedItem == null) {
-            // Alert user that no item is selected or handle as needed
             showAlert("No Selection", "No Item Selected", "Please select an item to delete.");
             return;
         }
         deleteItemFromDatabase(selectedItem);
-        tableView.getItems().remove(selectedItem);  // Remove the item from the view
+        tableView.getItems().remove(selectedItem);
     }
 
     private void deleteItemFromDatabase(Tables item) {
@@ -290,13 +289,13 @@ public class ManageProductController implements Initializable {
         String columnName = currentType == TableType.PRODUCT ? "name" : "category_name";
         String columnId = currentType == TableType.PRODUCT ? "product_id" : "category_id";
         String sql = "SELECT " + columnId + ", " + columnName + " FROM " + tableName;
-        System.out.println("Executing query: " + sql);  // Log the query
+        System.out.println("Executing query: " + sql);
 
         try (Connection conn = DBUtils.ConnectDb();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
-            int rowCount = 0; // For logging number of rows fetched
+            int rowCount = 0;
             while (rs.next()) {
                 int id = rs.getInt(columnId);
                 String name = rs.getString(columnName);
@@ -304,7 +303,7 @@ public class ManageProductController implements Initializable {
                 System.out.println("Adding to list: id=" + id + ", name=" + name);
                 rowCount++;
             }
-            System.out.println("Number of rows fetched: " + rowCount);  // Log the row count
+            System.out.println("Number of rows fetched: " + rowCount);
             System.out.println(list);
         } catch (SQLException e) {
             System.err.println("Error fetching data from the database: " + e.getMessage());
