@@ -94,7 +94,7 @@ public class ManageUserController implements Initializable {
     }
 
     private ObservableList<User> userList = FXCollections.observableArrayList();
-    private static final Logger LOGGER = Logger.getLogger(ManageUserController.class.getName());
+    static final Logger LOGGER = Logger.getLogger(ManageUserController.class.getName());
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -2,7 +2,6 @@ package cus1166.ecommerceapp;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,8 +23,10 @@ import java.sql.*;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import static cus1166.ecommerceapp.ProductController.LOGGER;
+import static cus1166.ecommerceapp.ManageUserController.LOGGER;
+
 
 public class ManageProductController implements Initializable {
 
@@ -92,7 +93,7 @@ public class ManageProductController implements Initializable {
                 String stockStatus = rs.getString("stock_status");
                 Blob imageBlob = rs.getBlob("image_data");
 
-
+                // Update UI Elements for name, price, and stock status
                 labelProductName.setText("Name: " + (name != null ? name : "N/A"));
                 labelProductPrice.setText("Price: $" + (price != 0 ? String.format("%.2f", price) : "N/A"));
                 labelStockStatus.setText("Stock Status: " + (stockStatus != null ? stockStatus : "N/A"));
