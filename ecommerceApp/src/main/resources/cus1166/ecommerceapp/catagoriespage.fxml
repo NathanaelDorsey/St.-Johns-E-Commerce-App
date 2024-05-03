@@ -8,11 +8,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.ManageUserController">
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.EditCategoryController">
    <children>
-      <HBox prefHeight="100.0" prefWidth="1300.0" stylesheets="@CSS/style.css">
+      <HBox prefHeight="57.0" prefWidth="1300.0" stylesheets="@CSS/style.css">
          <children>
             <HBox prefHeight="100.0" prefWidth="100.0">
                <children>
@@ -25,11 +26,15 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="100.0">
                <children>
-                  <Hyperlink fx:id="categories" alignment="CENTER" prefHeight="106.0" prefWidth="107.0" styleClass="mouse-moved" text="Categories" visited="true">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Hyperlink>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Hyperlink fx:id="categories" alignment="CENTER" prefHeight="169.0" prefWidth="131.0" styleClass="mouse-moved" text="Categories" visited="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="250.0">
@@ -51,7 +56,7 @@
                </children>
             </HBox>
             <HBox fx:id="SPACER1" prefHeight="100.0" prefWidth="120.0" />
-            <HBox alignment="CENTER" layoutX="310.0" layoutY="10.0" prefHeight="100.0" prefWidth="138.0">
+            <HBox alignment="CENTER" layoutX="310.0" layoutY="10.0" prefHeight="427.0" prefWidth="192.0">
                <children>
                   <ImageView fx:id="stjohnsLogo" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -128,5 +133,54 @@
             </HBox>
          </children>
       </HBox>
+      <VBox layoutX="14.0" layoutY="100.0" prefHeight="640.0" prefWidth="227.0">
+         <children>
+            <Hyperlink fx:id="categories1" alignment="CENTER" prefHeight="40.0" prefWidth="200.0" styleClass="mouse-moved" text="Clothing and Accessories" visited="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="categories11" alignment="CENTER" prefHeight="40.0" prefWidth="200.0" styleClass="mouse-moved" text="Gift and Collectible" visited="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="categories1111" alignment="CENTER" prefHeight="40.0" prefWidth="200.0" styleClass="mouse-moved" text="Electronics" visited="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="categories11112" alignment="CENTER" prefHeight="40.0" prefWidth="200.0" styleClass="mouse-moved" text="School Supplies" visited="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="categories11111" alignment="CENTER" prefHeight="40.0" prefWidth="200.0" styleClass="mouse-moved" text="Alumni" visited="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="categories11113" alignment="CENTER" prefHeight="40.0" prefWidth="200.0" styleClass="mouse-moved" text="Graduation" visited="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="categories11114" alignment="CENTER" prefHeight="40.0" prefWidth="200.0" styleClass="mouse-moved" text="Dorm and Home" visited="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="categories11115" alignment="CENTER" prefHeight="40.0" prefWidth="200.0" styleClass="mouse-moved" text="Health, Wellness and Beauty" visited="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="categories11116" alignment="CENTER" prefHeight="40.0" prefWidth="200.0" styleClass="mouse-moved" text="Books, Music and Games" visited="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
