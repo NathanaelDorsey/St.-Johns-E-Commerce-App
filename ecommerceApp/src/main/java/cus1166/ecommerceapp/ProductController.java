@@ -6,26 +6,25 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import models.Product;
 
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
+
 import java.util.Objects;
-import java.util.ResourceBundle;
+
 import java.util.logging.Level;
 import java.sql.*;
 
 import static cus1166.ecommerceapp.ManageUserController.LOGGER;
 
-public class ProductController implements Initializable {
+public class ProductController {
 
     @FXML
     private Hyperlink home;
@@ -120,64 +119,104 @@ public class ProductController implements Initializable {
     @FXML
     private Label totalcartamount;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        loadproduct();
-        loadcart();
-        loadreviews();
-        loadsimilarproducts();
+    public Product productData;
+
+    public void initData(int productId) {
+        loadProduct(productId);
+        loadCart();
+        loadReviews();
+        loadSimilarProducts();
     }
 
-    private void loadsimilarproducts() {
+    private void loadSimilarProducts() {
     }
 
-    private void loadreviews() {
+    private void loadReviews() {
     }
 
-    private void loadcart() {
+    private void loadCart() {
     }
 
-
-    private void loadproduct() {
+    private void loadProduct(int productId) {
         String sql = "SELECT name, price, stock_status, image_data, rating FROM Product WHERE product_id = ?";
         try (Connection conn = DBUtils.ConnectDb();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, productId);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 String name = rs.getString("name");
                 double price = rs.getDouble("price");
-                String stockStatus = rs.getString("stock_status");
+                String stockStatusStr = rs.getString("stock_status");
+                Product.StockStatus stockStatus = Product.StockStatus.valueOf(stockStatusStr);
+                
                 Blob imageBlob = rs.getBlob("image_data");
-
-                productname.setText("Name: " + (name != null ? name : "N/A"));
-                productprice.setText("Price: $" + (price != 0 ? String.format("%.2f", price) : "N/A"));
-                stockstatus.setText("Stock Status: " + (stockStatus != null ? stockStatus : "N/A"));
-
-
+                double rating = rs.getDouble("rating");
+                // Instantiate a new Product object
+                Product loadedProduct = new Product();
+                loadedProduct.setName(name);
+                loadedProduct.setPrice(price);
+                loadedProduct.setStockStatus(stockStatus);
+                loadedProduct.setImageBlob(imageBlob);
+                loadedProduct.setRating(rating);
+                this.productData = loadedProduct;
+                productname.setText(name != null ? name : "N/A");
+                productprice.setText(String.format("$%.2f", price));
+                stockstatus.setText(stockStatus != null ? String.valueOf(stockStatus) : "N/A");
+                productrating.setText(String.format("%s", rating));
                 if (imageBlob != null) {
-                    Image image = new Image(imageBlob.getBinaryStream());
-                    productImage.setImage(image);
+                    try (InputStream inputStream = imageBlob.getBinaryStream()) {
+                        Image image = new Image(inputStream);
+                        productImage.setImage(image);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        productImage.setImage(null);
+                    }
                 } else {
                     productImage.setImage(null);
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Database error: " + e.getMessage());
-        } catch (Exception e) {
-            System.err.println("Error loading image from database: " + e.getMessage());
-            productImage.setImage(null);
+            System.err.println("Error loading product from database: " + e.getMessage());
+            productData = null;
         }
     }
 
+    public void handleImageClick(MouseEvent event) {
+        if (productData == null) {
+            System.out.println("No product data available. Please ensure the product is loaded correctly.");
+            showAlert("Data Not Available", "Product data is not available. Please try again.");
+            return;
+        }
 
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cus1166/ecommerceapp/productpage.fxml"));
+            Parent root = loader.load();
+            ProductPageController productPageController = loader.getController();
+            productPageController.setProductData(productData);
+
+            Stage stage = new Stage();
+            stage.setTitle(productData.getProductName());
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
     public void switchToSearchPage(javafx.event.ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Productsearch.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Productsearch.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-
     public void switchToManageUsersPage(javafx.event.ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Admins/manageusers.fxml")));
@@ -190,7 +229,6 @@ public class ProductController implements Initializable {
             LOGGER.log(Level.SEVERE, "Failed to switch to Manage Users page", e);
         }
     }
-
     public void switchToAddProductsPage(javafx.event.ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Admins/addproducts.fxml")));
@@ -203,7 +241,6 @@ public class ProductController implements Initializable {
             LOGGER.log(Level.SEVERE, "Failed to switch to Add Products page", e);
         }
     }
-
     public void switchToManageProductsPage(javafx.event.ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Admins/manageproducts.fxml")));
@@ -216,7 +253,6 @@ public class ProductController implements Initializable {
             LOGGER.log(Level.SEVERE, "Failed to switch to Manage Products page", e);
         }
     }
-
     public void switchToHomepage(javafx.event.ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Admins/homepageadmin.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -224,7 +260,4 @@ public class ProductController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
-
-
 }

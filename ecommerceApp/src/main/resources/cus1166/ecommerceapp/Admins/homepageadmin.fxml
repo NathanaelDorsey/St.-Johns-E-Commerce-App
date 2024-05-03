@@ -142,15 +142,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <ScrollPane prefHeight="280.0" prefWidth="1300.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="1300.0">
-                     <children>
-                        <HBox fx:id="cardLayout" prefHeight="280.0" prefWidth="1300.0" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </ScrollPane>
+            <ScrollPane fx:id="recentlyAddedScrollPane" prefHeight="280.0" prefWidth="1300.0" vbarPolicy="NEVER" />
          </children></VBox>
       <VBox layoutY="400.0" prefHeight="386.0" prefWidth="1300.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="400.0" />
    </children>
