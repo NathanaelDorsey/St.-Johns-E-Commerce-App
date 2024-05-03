@@ -16,7 +16,6 @@
 <AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.CartPageController">
    <children>
       <Accordion />
-      <HBox layoutX="8.0" layoutY="11.0" prefHeight="31.0" prefWidth="91.0" />
       <HBox fx:id="box" alignment="CENTER" layoutX="86.0" layoutY="317.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="181.0" spacing="15.0">
          <children>
             <ImageView fx:id="productImage" fitHeight="83.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">

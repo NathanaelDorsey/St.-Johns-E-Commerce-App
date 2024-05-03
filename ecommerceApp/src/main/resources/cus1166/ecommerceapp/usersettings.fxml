@@ -3,17 +3,20 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.ManageUserController">
    <children>
-      <FlowPane layoutX="95.0" layoutY="100.0" prefHeight="700.0" prefWidth="1110.0" style="-fx-border-color: #CF102D; -fx-border-radius: 20px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="100.0" />
       <HBox prefHeight="100.0" prefWidth="1300.0" stylesheets="@CSS/style.css">
          <children>
             <HBox prefHeight="100.0" prefWidth="100.0">
@@ -130,5 +133,23 @@
             </HBox>
          </children>
       </HBox>
+      <SplitPane dividerPositions="0.2" layoutX="-2.0" layoutY="100.0" prefHeight="718.0" prefWidth="1204.0">
+         <items>
+            <VBox fx:id="sidebar">
+               <children>
+                  <Button maxWidth="1.7976931348623157E308" onAction="#showPersonalInfo" prefHeight="0.0" prefWidth="257.0" styleClass="sidebar-button" text="Personal Information" />
+                  <Button maxWidth="1.7976931348623157E308" onAction="#showOrders" styleClass="sidebar-button" text="Orders" />
+                  <Button maxWidth="1.7976931348623157E308" onAction="#showSecurity" styleClass="sidebar-button" text="Security" />
+                  <Button maxWidth="1.7976931348623157E308" onAction="#showPaymentMethods" prefHeight="25.0" prefWidth="257.0" styleClass="sidebar-button" text="Payment Methods" />
+               </children>
+            </VBox>
+            <StackPane fx:id="contentArea">
+               <children>
+                  <Label text="Select a category from the left sidebar to display its settings here." StackPane.alignment="CENTER" />
+               </children>
+            </StackPane>
+         </items>
+      </SplitPane>
+      <FlowPane layoutX="238.0" layoutY="100.0" prefHeight="718.0" prefWidth="967.0" style="-fx-border-color: #CF102D; -fx-border-radius: 20px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="100.0" />
    </children>
 </AnchorPane>
