@@ -15,7 +15,7 @@
    <children>
       <Accordion />
       <HBox layoutX="8.0" layoutY="11.0" prefHeight="31.0" prefWidth="91.0" />
-      <HBox prefHeight="100.0" prefWidth="1301.0" stylesheets="@CSS/style.css">
+      <HBox prefHeight="100.0" prefWidth="1310.0" stylesheets="@CSS/style.css">
          <children>
             <HBox prefHeight="100.0" prefWidth="100.0">
                <children>
@@ -53,7 +53,7 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox fx:id="SPACER1" prefHeight="100.0" prefWidth="120.0" />
+            <HBox fx:id="SPACER1" prefHeight="100.0" prefWidth="98.0" />
             <HBox alignment="CENTER" layoutX="310.0" layoutY="10.0" prefHeight="100.0" prefWidth="138.0">
                <children>
                   <ImageView fx:id="stjohnsLogo" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
@@ -63,7 +63,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <HBox fx:id="SPACER" prefHeight="100.0" prefWidth="165.0" />
+            <HBox fx:id="SPACER" prefHeight="100.0" prefWidth="132.0" />
             <HBox prefHeight="100.0" prefWidth="116.0">
                <children>
                   <Hyperlink fx:id="manageusers" alignment="CENTER" onAction="#switchToManageUsersPage" prefHeight="100.0" prefWidth="143.0" styleClass="mouse-moved" text="Manage Users" visited="true">
@@ -115,18 +115,16 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
                <children>
                   <Button fx:id="cart" mnemonicParsing="false">
-                     <graphic>
-                        <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Images/cart.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
                      <styleClass>
                         <String fx:value="white-background" />
                         <String fx:value="mouse-moved" />
                      </styleClass>
                   </Button>
+                  <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/cart.png" />
+                     </image>
+                  </ImageView>
                </children>
             </HBox>
          </children>
