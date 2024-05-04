@@ -117,7 +117,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
                      <children>
-                        <Button fx:id="cart" mnemonicParsing="false">
+                        <Button fx:id="cart" mnemonicParsing="false" onAction="#switchToCartPage">
                            <graphic>
                               <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -230,7 +230,7 @@
          <children>
             <HBox prefHeight="92.0" prefWidth="350.0">
                <children>
-                  <Button fx:id="addtocartbutton" mnemonicParsing="false" prefHeight="98.0" prefWidth="350.0" text="Add to Cart" />
+                  <Button fx:id="addtocartbutton" mnemonicParsing="false" onAction="#addToCartClicked" prefHeight="98.0" prefWidth="350.0" text="Add to Cart" />
                </children>
             </HBox>
             <Label fx:id="amountincart" prefHeight="51.0" prefWidth="350.0" text="Amount in Cart:" />

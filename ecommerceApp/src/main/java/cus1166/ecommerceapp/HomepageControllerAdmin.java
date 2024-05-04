@@ -79,14 +79,10 @@ public class HomepageControllerAdmin {
                 double price = resultSet.getDouble("price");
                 Product.StockStatus stockStatus = Product.StockStatus.valueOf(resultSet.getString("stock_status"));
                 String description = resultSet.getString("description");
-                // Fetch other attributes as needed from the database
-
-                // Create Product object
                 Product product = new Product(productId, productName, price, stockStatus, description, null, 0, null);
                 products.add(product);
             }
 
-            // Display products on homepage
             displayProducts(products);
 
         } catch (SQLException e) {

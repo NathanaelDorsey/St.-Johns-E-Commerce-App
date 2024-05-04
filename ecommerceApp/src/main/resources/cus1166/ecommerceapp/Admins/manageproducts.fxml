@@ -120,7 +120,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
                      <children>
-                        <Button fx:id="cart" mnemonicParsing="false">
+                        <Button fx:id="cart" mnemonicParsing="false" onAction="#switchToCartPage">
                            <graphic>
                               <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

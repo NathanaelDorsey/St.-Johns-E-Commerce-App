@@ -130,13 +130,10 @@ public class ProductController {
 
     private void loadSimilarProducts() {
     }
-
     private void loadReviews() {
     }
-
     private void loadCart() {
     }
-
     private void loadProduct(int productId) {
         String sql = "SELECT name, price, stock_status, image_data, rating FROM Product WHERE product_id = ?";
         try (Connection conn = DBUtils.ConnectDb();
@@ -148,10 +145,8 @@ public class ProductController {
                 double price = rs.getDouble("price");
                 String stockStatusStr = rs.getString("stock_status");
                 Product.StockStatus stockStatus = Product.StockStatus.valueOf(stockStatusStr);
-                
                 Blob imageBlob = rs.getBlob("image_data");
                 double rating = rs.getDouble("rating");
-                // Instantiate a new Product object
                 Product loadedProduct = new Product();
                 loadedProduct.setName(name);
                 loadedProduct.setPrice(price);
@@ -180,14 +175,12 @@ public class ProductController {
             productData = null;
         }
     }
-
     public void handleImageClick(MouseEvent event) {
         if (productData == null) {
             System.out.println("No product data available. Please ensure the product is loaded correctly.");
             showAlert("Data Not Available", "Product data is not available. Please try again.");
             return;
         }
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cus1166/ecommerceapp/productpage.fxml"));
             Parent root = loader.load();
@@ -202,7 +195,6 @@ public class ProductController {
             e.printStackTrace();
         }
     }
-
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

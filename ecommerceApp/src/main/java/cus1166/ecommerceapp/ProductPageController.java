@@ -1,8 +1,8 @@
 package cus1166.ecommerceapp;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,13 +17,12 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import models.Category;
 import models.Product;
+import models.ShoppingCart;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.sql.Blob;
 import java.util.Objects;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
@@ -113,8 +112,10 @@ public class ProductPageController {
 
     @FXML
     private Label totalcartamount;
-
-
+    ShoppingCart shoppingCart = ShoppingCart.getInstance();
+    public void addToCart(Product product) {
+        shoppingCart.addToCart(product, 1);
+    }
     public void setProductData(Product product) {
         if (product != null) {
             this.productData = product;
@@ -159,6 +160,14 @@ public class ProductPageController {
             productImage.setImage(null);
         }
     }
+    @FXML
+    private void addToCartClicked(ActionEvent event) {
+        addToCart(productData);
+        int amount = shoppingCart.getAmountInCart(productData);
+        amountincart.setText(String.valueOf(amount));
+        totalcartamount.setText("$" + String.format("%.2f", shoppingCart.getTotalCartAmount()));
+    }
+
 
     public void switchToManageUsersPage(javafx.event.ActionEvent event) {
         try {
