@@ -185,6 +185,7 @@ public class CartPageController {
         final double SALES_TAX_RATE = 0.08;
         return subtotal * SALES_TAX_RATE;
     }
+
     @FXML
     private void addToCartClicked(ActionEvent event) {
         try {
@@ -198,6 +199,7 @@ public class CartPageController {
             System.out.println("Invalid number format for quantity");
         }
     }
+
     @FXML
     private void removeFromCartClicked(ActionEvent event) {
         Product selectedProduct = carttable.getSelectionModel().getSelectedItem();
@@ -207,6 +209,7 @@ public class CartPageController {
             updateCartUI();
         }
     }
+
     @FXML
     private void clearCartClicked(ActionEvent event) {
         shoppingCart.clearCart();
@@ -218,6 +221,15 @@ public class CartPageController {
     private void checkoutClicked(ActionEvent event) {
 
     }
+
+    public void switchToSearchPage(javafx.event.ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Productsearch.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void switchToManageUsersPage(javafx.event.ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Admins/manageusers.fxml")));
@@ -229,13 +241,6 @@ public class CartPageController {
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Failed to switch to Manage Users page", e);
         }
-    }
-    public void switchToSearchPage(javafx.event.ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Productsearch.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 
     public void switchToAddProductsPage(javafx.event.ActionEvent event) {
@@ -272,4 +277,31 @@ public class CartPageController {
         stage.show();
     }
 
+    public void switchToUserPage(javafx.event.ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/usersettings.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            LOGGER.info("Switched to User page successfully.");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Failed to switch to Cart page", e);
+        }
+    }
+
+
+    public void switchToCartPage(javafx.event.ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/cartpage.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            LOGGER.info("Switched to Cart page successfully.");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Failed to switch to Cart page", e);
+        }
+
+    }
 }

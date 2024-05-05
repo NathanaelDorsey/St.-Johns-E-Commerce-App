@@ -15,7 +15,121 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.HomepageController">
    <children>
-      <VBox prefHeight="100.0" prefWidth="1300.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <VBox prefHeight="100.0" prefWidth="1300.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="1315.0" stylesheets="@CSS/style.css">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Hyperlink fx:id="home" alignment="CENTER" onAction="#switchToHomepage" prefHeight="111.0" prefWidth="110.0" styleClass="mouse-moved" text="Home" visited="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Hyperlink fx:id="categories" alignment="CENTER" prefHeight="106.0" prefWidth="107.0" styleClass="mouse-moved" text="Categories" visited="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="250.0">
+                     <children>
+                        <TextField fx:id="searchbar" prefHeight="32.0" prefWidth="222.0" promptText="Search" />
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
+                           <children>
+                              <Button fx:id="searchLogo" mnemonicParsing="false" onAction="#switchToSearchPage" opacity="0.5" styleClass="white-background">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/search.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="SPACER1" prefHeight="100.0" prefWidth="98.0" />
+                  <HBox alignment="CENTER" layoutX="310.0" layoutY="10.0" prefHeight="100.0" prefWidth="138.0">
+                     <children>
+                        <ImageView fx:id="stjohnsLogo" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/StjohnsLogo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="SPACER" prefHeight="100.0" prefWidth="132.0" />
+                  <HBox prefHeight="100.0" prefWidth="116.0">
+                     <children>
+                        <Hyperlink fx:id="manageusers" alignment="CENTER" onAction="#switchToManageUsersPage" prefHeight="100.0" prefWidth="143.0" styleClass="mouse-moved" text="Manage Users" visited="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="936.0" layoutY="10.0" prefHeight="100.0" prefWidth="118.0">
+                     <children>
+                        <Hyperlink fx:id="addproducts" alignment="CENTER" onAction="#switchToAddProductsPage" prefHeight="111.0" prefWidth="110.0" styleClass="mouse-moved" text="Add Products" visited="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Hyperlink>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Hyperlink fx:id="manageproducts" alignment="CENTER" onAction="#switchToManageProductsPage" prefHeight="100.0" prefWidth="115.0" text="Manage Products" visited="true" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="mouse-moved" />
+                              <String fx:value="selected" />
+                           </styleClass>
+                        </Hyperlink>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="60.0" styleClass="mouse-moved">
+                     <children>
+                        <Button fx:id="user" mnemonicParsing="false">
+                           <styleClass>
+                              <String fx:value="white-background" />
+                              <String fx:value="mouse-moved" />
+                           </styleClass>
+                        </Button>
+                        <ImageView fitHeight="40.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/profile.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
+                     <children>
+                        <Button fx:id="cart" mnemonicParsing="false">
+                           <styleClass>
+                              <String fx:value="white-background" />
+                              <String fx:value="mouse-moved" />
+                           </styleClass>
+                        </Button>
+                        <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/cart.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children></VBox>
       <VBox layoutY="106.0" prefHeight="280.0" prefWidth="1300.0" AnchorPane.bottomAnchor="414.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="106.0">
          <children>
             <Label prefHeight="27.0" prefWidth="136.0" text="Recently Added">
@@ -34,119 +148,5 @@
             </ScrollPane>
          </children></VBox>
       <VBox layoutY="400.0" prefHeight="386.0" prefWidth="1300.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="400.0" />
-      <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="1300.0" stylesheets="@CSS/style.css">
-         <children>
-            <HBox prefHeight="100.0" prefWidth="100.0">
-               <children>
-                  <Hyperlink fx:id="home" alignment="CENTER" onAction="#switchToHomepage" prefHeight="111.0" prefWidth="110.0" styleClass="mouse-moved" text="Home" visited="true">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Hyperlink>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="100.0">
-               <children>
-                  <Hyperlink fx:id="categories" alignment="CENTER" prefHeight="106.0" prefWidth="107.0" styleClass="mouse-moved" text="Categories" visited="true">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Hyperlink>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="250.0">
-               <children>
-                  <TextField fx:id="searchbar" prefHeight="32.0" prefWidth="222.0" promptText="Search" />
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
-                     <children>
-                        <Button fx:id="searchLogo" mnemonicParsing="false" onAction="#switchToSearchPage" opacity="0.5" styleClass="white-background">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@Images/search.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
-            <HBox fx:id="SPACER1" prefHeight="100.0" prefWidth="98.0" />
-            <HBox alignment="CENTER" layoutX="310.0" layoutY="10.0" prefHeight="100.0" prefWidth="138.0">
-               <children>
-                  <ImageView fx:id="stjohnsLogo" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Images/StjohnsLogo.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-            <HBox fx:id="SPACER" prefHeight="100.0" prefWidth="132.0" />
-            <HBox prefHeight="100.0" prefWidth="116.0">
-               <children>
-                  <Hyperlink fx:id="manageusers" alignment="CENTER" onAction="#switchToManageUsersPage" prefHeight="100.0" prefWidth="143.0" styleClass="mouse-moved" text="Manage Users" visited="true">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Hyperlink>
-               </children>
-            </HBox>
-            <HBox layoutX="936.0" layoutY="10.0" prefHeight="100.0" prefWidth="118.0">
-               <children>
-                  <Hyperlink fx:id="addproducts" alignment="CENTER" onAction="#switchToAddProductsPage" prefHeight="111.0" prefWidth="110.0" styleClass="mouse-moved" text="Add Products" visited="true">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Hyperlink>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="100.0">
-               <children>
-                  <Hyperlink fx:id="manageproducts" alignment="CENTER" onAction="#switchToManageProductsPage" prefHeight="100.0" prefWidth="115.0" text="Manage Products" visited="true" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="mouse-moved" />
-                        <String fx:value="selected" />
-                     </styleClass>
-                  </Hyperlink>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="60.0" styleClass="mouse-moved">
-               <children>
-                  <Button fx:id="userProfileIcon" mnemonicParsing="false">
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Images/profile.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <styleClass>
-                        <String fx:value="white-background" />
-                        <String fx:value="mouse-moved" />
-                     </styleClass>
-                  </Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
-               <children>
-                  <Button fx:id="cart" mnemonicParsing="false">
-                     <styleClass>
-                        <String fx:value="white-background" />
-                        <String fx:value="mouse-moved" />
-                     </styleClass>
-                  </Button>
-                  <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Images/cart.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-         </children>
-      </HBox>
    </children>
 </AnchorPane>

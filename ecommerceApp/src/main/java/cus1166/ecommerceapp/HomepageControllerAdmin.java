@@ -165,6 +165,19 @@ public class HomepageControllerAdmin {
         stage.show();
     }
 
+    public void switchToUserPage (javafx.event.ActionEvent event){
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/usersettings.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            LOGGER.info("Switched to User page successfully.");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Failed to switch to Cart page", e);
+        }
+    }
+
 
     public void switchToCartPage (javafx.event.ActionEvent event){
         try {

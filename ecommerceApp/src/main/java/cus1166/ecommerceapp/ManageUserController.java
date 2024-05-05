@@ -85,12 +85,38 @@ public class ManageUserController implements Initializable {
             LOGGER.log(Level.SEVERE, "Failed to switch to Manage Products page", e);
         }
     }
+
+    public void switchToUserPage (javafx.event.ActionEvent event){
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/usersettings.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            LOGGER.info("Switched to User page successfully.");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Failed to switch to Cart page", e);
+        }
+    }
     public void switchToHomepage(javafx.event.ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Admins/homepageadmin.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void switchToCartPage (javafx.event.ActionEvent event){
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/cartpage.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            LOGGER.info("Switched to Cart page successfully.");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Failed to switch to Cart page", e);
+        }
     }
 
     private ObservableList<User> userList = FXCollections.observableArrayList();

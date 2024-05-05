@@ -176,6 +176,19 @@ public class ManageProductController implements Initializable {
         stage.show();
     }
 
+    public void switchToCartPage (javafx.event.ActionEvent event){
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/cartpage.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            LOGGER.info("Switched to Cart page successfully.");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Failed to switch to Cart page", e);
+        }
+    }
+
     @FXML
     void switchTableType(javafx.event.ActionEvent event) {
         Button btn = (Button) event.getSource();
