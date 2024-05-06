@@ -57,6 +57,11 @@ public class LoginPageController implements Initializable {
 
     @FXML
     private TextField rpassword;
+    @FXML
+    private TextField rfirstname;
+    @FXML
+    private TextField rlastname;
+
 
     @FXML
     private TextField confirmPassword;
@@ -87,19 +92,25 @@ public class LoginPageController implements Initializable {
         } else {
             connection = DBUtils.ConnectDb();
             if (connection != null) {
-                String sql = "INSERT INTO user (username, password, email) VALUES (?, ?, ?)";
+                String sql = "INSERT INTO user (username, password, email, first_name, last_name) VALUES (?, ?, ?,?,?)";
                 try (PreparedStatement pst = connection.prepareStatement(sql)) {
                     pst.setString(1, rxNumber.getText());
+                    EccomerceApp.setUsername(xNumber.getText().trim());
                     pst.setString(2, rpassword.getText());
                     pst.setString(3, email.getText());
+                    pst.setString(4, rfirstname.getText());
+                    pst.setString(5, rlastname.getText());
                     pst.execute();
                     JOptionPane.showMessageDialog(null, "Successfully registered.");
+                    root= FXMLLoader.load(getClass().getResource("/cus1166/ecommerceapp/homepage.fxml"));
                     stage= (Stage)((Node)event.getSource()).getScene().getWindow();
                     scene = new Scene(root);
                     stage.setScene(scene);
                     stage.show();
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(null, "Error adding user: " + ex.getMessage());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Error connecting to database.");
