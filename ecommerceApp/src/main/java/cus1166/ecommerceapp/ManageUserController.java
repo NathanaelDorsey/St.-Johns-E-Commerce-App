@@ -48,6 +48,17 @@ public class ManageUserController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    public void switchToCategoriesPage(javafx.event.ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/categoriespage.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Failed to switch to Categories page", e);
+        }
+    }
 
     public void switchToManageUsersPage(javafx.event.ActionEvent event) {
         try {

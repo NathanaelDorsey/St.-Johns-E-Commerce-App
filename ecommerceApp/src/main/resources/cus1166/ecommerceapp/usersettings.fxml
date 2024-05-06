@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -37,9 +36,8 @@
                   </Hyperlink>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="250.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="45.0">
                <children>
-                  <TextField fx:id="searchbar" prefHeight="32.0" prefWidth="222.0" promptText="Search" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
                      <children>
                         <Button fx:id="searchLogo" mnemonicParsing="false" onAction="#switchToSearchPage" opacity="0.5" styleClass="white-background">
@@ -55,7 +53,7 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox fx:id="SPACER1" prefHeight="100.0" prefWidth="120.0" />
+            <HBox fx:id="SPACER1" prefHeight="100.0" prefWidth="325.0" />
             <HBox alignment="CENTER" layoutX="310.0" layoutY="10.0" prefHeight="100.0" prefWidth="138.0">
                <children>
                   <ImageView fx:id="stjohnsLogo" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
@@ -65,7 +63,6 @@
                   </ImageView>
                </children>
             </HBox>
-            <HBox fx:id="SPACER" prefHeight="100.0" prefWidth="165.0" />
             <HBox prefHeight="100.0" prefWidth="116.0">
                <children>
                   <Hyperlink fx:id="manageusers" alignment="CENTER" onAction="#switchToManageUsersPage" prefHeight="100.0" prefWidth="143.0" styleClass="mouse-moved" text="Manage Users" visited="true">

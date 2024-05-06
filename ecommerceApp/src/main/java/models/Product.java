@@ -28,6 +28,8 @@ public class Product {
    public void setStockStatus(StockStatus stockStatus) {
       this.stockStatus = stockStatus;
    }
+
+
    public enum StockStatus {
       In_Stock("In_Stock"),
       Out_of_Stock("Out_of_Stock");
