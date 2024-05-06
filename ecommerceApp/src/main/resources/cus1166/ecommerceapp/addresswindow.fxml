@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox fx:id="box" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="185.0" prefWidth="400.0" spacing="15.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.AddressWindowController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="185.0" prefWidth="399.0" spacing="10">
+         <Label text="Change Address" />
+         <TextField fx:id="addressTextField" />
+         <HBox spacing="10">
+            <Button onAction="#saveAddress" text="Save" />
+            <Button onAction="#cancel" text="Cancel" />
+         </HBox>
+      </VBox>
+   </children>
+</HBox>
