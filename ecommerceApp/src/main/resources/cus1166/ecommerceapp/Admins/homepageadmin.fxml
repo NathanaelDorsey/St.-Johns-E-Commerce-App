@@ -133,15 +133,14 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutY="106.0" prefHeight="280.0" prefWidth="1300.0" AnchorPane.bottomAnchor="414.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="106.0">
+      <VBox layoutY="106.0" prefHeight="696.0" prefWidth="1300.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="106.0">
          <children>
             <Label prefHeight="27.0" prefWidth="136.0" text="Recently Added">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <ScrollPane fx:id="recentlyAddedScrollPane" prefHeight="280.0" prefWidth="1300.0" vbarPolicy="NEVER" />
+            <ScrollPane fx:id="recentlyAddedScrollPane" prefHeight="719.0" prefWidth="1300.0" vbarPolicy="NEVER" />
          </children></VBox>
-      <VBox layoutY="386.0" prefHeight="415.0" prefWidth="1300.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="386.0" />
    </children>
 </AnchorPane>
