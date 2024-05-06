@@ -198,11 +198,11 @@
                   </Hyperlink>
                </children>
             </HBox>
-            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="60.0" styleClass="mouse-moved">
+            <HBox fx:id="switchToUserPage" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
                <children>
                   <Button fx:id="userProfileIcon" mnemonicParsing="false">
                      <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@Images/profile.png" />
                            </image>
