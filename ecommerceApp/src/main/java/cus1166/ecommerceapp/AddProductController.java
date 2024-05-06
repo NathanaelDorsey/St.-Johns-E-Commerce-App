@@ -233,12 +233,6 @@ public class AddProductController implements Initializable {
         }
     }
 
-
-
-
-
-
-
     public void handleLoadImageAction(ActionEvent event) {
         FileChooser fc = new FileChooser();
         fc.setTitle("Select Image");
