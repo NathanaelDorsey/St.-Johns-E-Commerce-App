@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Product;
 import models.ShoppingCart;
@@ -20,8 +21,9 @@ import models.Tables;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
+import java.sql.*;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.logging.Level;
 
 import static cus1166.ecommerceapp.HomepageControllerAdmin.LOGGER;
@@ -219,8 +221,74 @@ public class CartPageController {
 
     @FXML
     private void checkoutClicked(ActionEvent event) {
-
+        String username = EccomerceApp.getUsername();
+        if (username != null && !username.isEmpty()) {
+            int userId = UserManager.getUserIdFromUsername(username);
+            if (userId != -1) {
+                String address = UserManager.getAddressFromDatabase(username);
+                if (address != null && !address.isEmpty()) {
+                    showAddressWindow(address);
+                    placeOrder(userId);
+                } else {
+                    System.out.println("Address not found for user: " + username);
+                }
+            } else {
+                System.out.println("User ID not found for username: " + username);
+            }
+        } else {
+            System.out.println("Username not found in session.");
+        }
     }
+
+    private void showAddressWindow(String address) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cus1166/ecommerceapp/AddressWindow.fxml"));
+            Parent root = loader.load();
+            AddressWindowController controller = loader.getController();
+            controller.setAddress(EccomerceApp.getUsername());
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.setTitle("Change Address");
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showOrderPlacedConfirmation() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Order Placed");
+        alert.setHeaderText(null);
+        alert.setContentText("Your order has been successfully placed!");
+        alert.showAndWait();
+    }
+
+    private void placeOrder(int userId) {
+        String insertOrderQuery = "INSERT INTO `order` (user_id, status, date_ordered, total_price) VALUES (?, ?, ?, ?)";
+        try (Connection conn = DBUtils.ConnectDb();
+             PreparedStatement stmt = conn.prepareStatement(insertOrderQuery)) {
+            stmt.setInt(1, userId);
+            stmt.setString(2, "Placed");
+            stmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+            stmt.setDouble(4, calculateOrderTotal());
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Order placed successfully.");
+                showOrderPlacedConfirmation();
+            } else {
+                System.out.println("Failed to place order.");
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Failed to place order", e);
+        }
+    }
+
+    private double calculateOrderTotal() {
+        return (calculateSubtotal() + calculateSalesTax(calculateSubtotal()));
+    }
+
 
     public void switchToSearchPage(javafx.event.ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Productsearch.fxml")));
@@ -268,7 +336,6 @@ public class CartPageController {
             LOGGER.log(Level.SEVERE, "Failed to switch to Manage Products page", e);
         }
     }
-
     public void switchToHomepage(javafx.event.ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Admins/homepageadmin.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -277,7 +344,7 @@ public class CartPageController {
         stage.show();
     }
 
-    public void switchToUserPage(javafx.event.ActionEvent event) {
+    public void switchToUserPage (javafx.event.ActionEvent event){
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/usersettings.fxml")));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -291,7 +358,7 @@ public class CartPageController {
     }
 
 
-    public void switchToCartPage(javafx.event.ActionEvent event) {
+    public void switchToCartPage (javafx.event.ActionEvent event){
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/cartpage.fxml")));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -302,6 +369,5 @@ public class CartPageController {
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Failed to switch to Cart page", e);
         }
-
     }
 }

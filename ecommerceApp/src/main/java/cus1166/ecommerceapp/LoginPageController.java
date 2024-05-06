@@ -7,11 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javax.swing.*;
@@ -53,7 +50,7 @@ public class LoginPageController implements Initializable {
     @FXML
     private TextField xNumber;
     @FXML
-    private TextField password;
+    private PasswordField password;
 
     @FXML
     private TextField rxNumber;
@@ -141,6 +138,7 @@ public class LoginPageController implements Initializable {
 
             try (PreparedStatement pst = connection.prepareStatement(sql)) {
                 pst.setString(1, xNumber.getText().trim());
+                EccomerceApp.setUsername(xNumber.getText().trim());
                 pst.setString(2, password.getText().trim());
                 try (ResultSet rs = pst.executeQuery()) {
                     if (rs.next()) {

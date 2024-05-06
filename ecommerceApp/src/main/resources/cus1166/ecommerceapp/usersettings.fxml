@@ -15,34 +15,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.ManageUserController">
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.UserPageController">
    <children>
-      <SplitPane dividerPositions="0.2" layoutX="-2.0" layoutY="100.0" prefHeight="718.0" prefWidth="1204.0">
-         <items>
-            <VBox fx:id="sidebar">
-               <children>
-                  <Button maxWidth="1.7976931348623157E308" onAction="#showPersonalInfo" prefHeight="0.0" prefWidth="257.0" styleClass="sidebar-button" text="Personal Information" />
-                  <Button maxWidth="1.7976931348623157E308" onAction="#showOrders" styleClass="sidebar-button" text="Orders" />
-                  <Button maxWidth="1.7976931348623157E308" onAction="#showSecurity" styleClass="sidebar-button" text="Security" />
-                  <Button maxWidth="1.7976931348623157E308" onAction="#showPaymentMethods" prefHeight="25.0" prefWidth="257.0" styleClass="sidebar-button" text="Payment Methods" />
-               </children>
-            </VBox>
-            <StackPane fx:id="contentArea">
-               <children>
-                  <Label text="Select a category from the left sidebar to display its settings here." StackPane.alignment="CENTER" />
-               </children>
-            </StackPane>
-         </items>
-      </SplitPane>
-      <FlowPane layoutX="238.0" layoutY="100.0" prefHeight="718.0" prefWidth="967.0" style="-fx-border-color: #CF102D; -fx-border-radius: 20px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="100.0" />
-      <HBox prefHeight="100.0" prefWidth="1315.0" stylesheets="@CSS/style.css">
+      <HBox prefHeight="100.0" prefWidth="1301.0" stylesheets="@CSS/style.css">
          <children>
             <HBox prefHeight="100.0" prefWidth="100.0">
                <children>
-                  <Hyperlink fx:id="home" alignment="CENTER" onAction="#switchToHomepage" prefHeight="111.0" prefWidth="110.0" styleClass="mouse-moved" text="Home" visited="true">
+                  <Hyperlink fx:id="home" alignment="CENTER" prefHeight="111.0" prefWidth="110.0" text="Home" visited="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="mouse-moved" />
+                        <String fx:value="selected" />
+                     </styleClass>
                   </Hyperlink>
                </children>
             </HBox>
@@ -73,7 +59,7 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox fx:id="SPACER1" prefHeight="100.0" prefWidth="98.0" />
+            <HBox fx:id="SPACER1" prefHeight="100.0" prefWidth="120.0" />
             <HBox alignment="CENTER" layoutX="310.0" layoutY="10.0" prefHeight="100.0" prefWidth="138.0">
                <children>
                   <ImageView fx:id="stjohnsLogo" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
@@ -83,7 +69,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <HBox fx:id="SPACER" prefHeight="100.0" prefWidth="132.0" />
+            <HBox fx:id="SPACER" prefHeight="100.0" prefWidth="165.0" />
             <HBox prefHeight="100.0" prefWidth="116.0">
                <children>
                   <Hyperlink fx:id="manageusers" alignment="CENTER" onAction="#switchToManageUsersPage" prefHeight="100.0" prefWidth="143.0" styleClass="mouse-moved" text="Manage Users" visited="true">
@@ -104,20 +90,16 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="100.0">
                <children>
-                  <Hyperlink fx:id="manageproducts" alignment="CENTER" onAction="#switchToManageProductsPage" prefHeight="100.0" prefWidth="115.0" text="Manage Products" visited="true" wrapText="true">
+                  <Hyperlink fx:id="manageproducts" alignment="CENTER" onAction="#switchToManageProductsPage" prefHeight="100.0" prefWidth="115.0" styleClass="mouse-moved" text="Manage Products" visited="true" wrapText="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
-                     <styleClass>
-                        <String fx:value="mouse-moved" />
-                        <String fx:value="selected" />
-                     </styleClass>
                   </Hyperlink>
                </children>
             </HBox>
             <HBox fx:id="switchToUserPage" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
                <children>
-                  <Button fx:id="userProfileIcon" mnemonicParsing="false">
+                  <Button fx:id="userProfileIcon" mnemonicParsing="false" onAction="#switchToUserPage">
                      <graphic>
                         <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -132,22 +114,41 @@
                   </Button>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
+            <HBox fx:id="switchToCartPage" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
                <children>
-                  <Button fx:id="cart" mnemonicParsing="false">
+                  <Button fx:id="cart" mnemonicParsing="false" onAction="#switchToCartPage">
+                     <graphic>
+                        <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/cart.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                      <styleClass>
                         <String fx:value="white-background" />
                         <String fx:value="mouse-moved" />
                      </styleClass>
                   </Button>
-                  <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Images/cart.png" />
-                     </image>
-                  </ImageView>
                </children>
             </HBox>
          </children>
       </HBox>
+      <SplitPane dividerPositions="0.2" layoutX="-2.0" layoutY="100.0" prefHeight="718.0" prefWidth="1204.0">
+         <items>
+            <VBox fx:id="sidebar">
+               <children>
+                  <Button fx:id="perinfobtn" maxWidth="1.7976931348623157E308" onAction="#showPersonalInfo" prefHeight="0.0" prefWidth="257.0" styleClass="sidebar-button" text="Personal Information" />
+                  <Button fx:id="ordersbtn" maxWidth="1.7976931348623157E308" onAction="#showOrders" styleClass="sidebar-button" text="Orders" />
+                  <Button fx:id="paymentbtn" maxWidth="1.7976931348623157E308" onAction="#showPaymentMethods" prefHeight="25.0" prefWidth="257.0" styleClass="sidebar-button" text="Payment Methods" />
+               </children>
+            </VBox>
+            <StackPane fx:id="contentArea">
+               <children>
+                  <Label text="Select a category from the left sidebar to display its settings here." StackPane.alignment="CENTER" />
+               </children>
+            </StackPane>
+         </items>
+      </SplitPane>
+      <FlowPane layoutX="238.0" layoutY="100.0" prefHeight="718.0" prefWidth="959.0" style="-fx-border-color: #CF102D; -fx-border-radius: 20px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="238.0" AnchorPane.rightAnchor="104.0" AnchorPane.topAnchor="100.0" />
    </children>
 </AnchorPane>
