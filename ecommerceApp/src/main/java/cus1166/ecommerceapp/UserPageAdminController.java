@@ -22,7 +22,7 @@ import java.util.logging.Level;
 
 import static cus1166.ecommerceapp.HomepageControllerAdmin.LOGGER;
 
-public class UserPageController {
+public class UserPageAdminController {
 
     @FXML
     private VBox sidebar;
@@ -128,25 +128,63 @@ public class UserPageController {
         }
     }
 
-    public void switchToSearchPage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Productsearchusers.fxml")));
+    public void switchToSearchPage(javafx.event.ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Admins/Productsearch.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void switchToHomepage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/homepage.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToUserPage (ActionEvent event){
+    public void switchToManageUsersPage(javafx.event.ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/usersettings.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Admins/manageusers.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            LOGGER.info("Switched to Manage Users page successfully.");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Failed to switch to Manage Users page", e);
+        }
+    }
+
+    public void switchToAddProductsPage(javafx.event.ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Admins/addproducts.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            LOGGER.info("Switched to Add Products page successfully.");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Failed to switch to Add Products page", e);
+        }
+    }
+
+    public void switchToManageProductsPage(javafx.event.ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Admins/manageproducts.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            LOGGER.info("Switched to Manage Products page successfully.");
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Failed to switch to Manage Products page", e);
+        }
+    }
+    public void switchToHomepage(javafx.event.ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Admins/homepageadmin.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToUserPage (javafx.event.ActionEvent event){
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Admins/adminsettings.fxml")));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -158,9 +196,9 @@ public class UserPageController {
     }
 
 
-    public void switchToCartPage (ActionEvent event){
+    public void switchToCartPage (javafx.event.ActionEvent event){
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/cartpageusers.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Admins/cartpage.fxml")));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -170,9 +208,9 @@ public class UserPageController {
             LOGGER.log(Level.SEVERE, "Failed to switch to Cart page", e);
         }
     }
-    public void switchToCategoriesPage(ActionEvent event) {
+    public void switchToCategoriesPage(javafx.event.ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/categoriespageusers.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/Admins/categoriespage.fxml")));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);

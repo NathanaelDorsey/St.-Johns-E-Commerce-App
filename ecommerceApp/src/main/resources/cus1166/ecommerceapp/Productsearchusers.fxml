@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1300.0" styleClass="white-background" stylesheets="@CSS/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.SearchPageAdminController">
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" styleClass="white-background" stylesheets="@CSS/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.SearchPageController">
    <children>
       <Accordion />
       <HBox layoutX="8.0" layoutY="11.0" prefHeight="31.0" prefWidth="91.0" />
@@ -68,33 +68,9 @@
                </children>
             </HBox>
             <HBox fx:id="SPACER" prefHeight="100.0" prefWidth="132.0" />
-            <HBox prefHeight="100.0" prefWidth="116.0">
-               <children>
-                  <Hyperlink fx:id="manageusers" alignment="CENTER" onAction="#switchToManageUsersPage" prefHeight="100.0" prefWidth="143.0" styleClass="mouse-moved" text="Manage Users" visited="true">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Hyperlink>
-               </children>
-            </HBox>
-            <HBox layoutX="936.0" layoutY="10.0" prefHeight="100.0" prefWidth="118.0">
-               <children>
-                  <Hyperlink fx:id="addproducts" alignment="CENTER" onAction="#switchToAddProductsPage" prefHeight="111.0" prefWidth="110.0" styleClass="mouse-moved" text="Add Products" visited="true">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Hyperlink>
-               </children>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="100.0">
-               <children>
-                  <Hyperlink fx:id="manageproducts" alignment="CENTER" onAction="#switchToManageProductsPage" prefHeight="100.0" prefWidth="115.0" styleClass="mouse-moved" text="Manage Products" visited="true" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Hyperlink>
-               </children>
-            </HBox>
+            <HBox prefHeight="100.0" prefWidth="116.0" />
+            <HBox layoutX="936.0" layoutY="10.0" prefHeight="100.0" prefWidth="118.0" />
+            <HBox prefHeight="100.0" prefWidth="100.0" />
             <HBox fx:id="switchToUserPage" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
                <children>
                   <Button fx:id="userProfileIcon" mnemonicParsing="false" onAction="#switchToUserPage">

@@ -1,36 +1,63 @@
 package cus1166.ecommerceapp;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import models.Category;
-import models.Product;
-import models.ShoppingCart;
-
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
-import java.util.stream.Collectors;
+import java.util.logging.Logger;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import models.Product;
+
 
 import static cus1166.ecommerceapp.HomepageControllerAdmin.LOGGER;
 
-public class ProductPageController {
+public class CategoryPageAdminController {
 
-    private Product productData;
+    @FXML
+    private Hyperlink clothingtab;
+
+    @FXML
+    private Hyperlink gifttab;
+
+    @FXML
+    private Hyperlink electronictab;
+
+    @FXML
+    private Hyperlink schooltab;
+
+    @FXML
+    private Hyperlink alumnitab;
+
+    @FXML
+    private Hyperlink graduationtab;
+
+    @FXML
+    private Hyperlink dormtab;
+
+    @FXML
+    private Hyperlink healthtab;
+
+    @FXML
+    private Hyperlink bookstab;
 
     @FXML
     private Hyperlink home;
@@ -63,109 +90,74 @@ public class ProductPageController {
     private Hyperlink manageproducts;
 
     @FXML
+    private HBox switchToUserPage;
+
+    @FXML
     private Button userProfileIcon;
+
+    @FXML
+    private HBox switchToCartPage;
 
     @FXML
     private Button cart;
 
     @FXML
-    private HBox box;
+    private ScrollPane productContainer;
 
     @FXML
-    private ImageView productImage;
-
-    @FXML
-    private Label productname;
-
-    @FXML
-    private Label productcategory;
-
-    @FXML
-    private Label productprice;
-
-    @FXML
-    private Label stockstatus;
-
-    @FXML
-    private Label productrating;
-
-    @FXML
-    private Label reviewerusername;
-
-    @FXML
-    private Label reviewerrating;
-
-    @FXML
-    private Label reviewerratingdate;
-
-    @FXML
-    private Label reviewerratingdescription;
-
-    @FXML
-    private TextArea productdescription;
-
-    @FXML
-    private Button addtocartbutton;
-
-    @FXML
-    private Label amountincart;
-
-    @FXML
-    private Label totalcartamount;
-    ShoppingCart shoppingCart = ShoppingCart.getInstance();
-    public void addToCart(Product product) {
-        shoppingCart.addToCart(product, 1);
-    }
-    public void setProductData(Product product) {
-        if (product != null) {
-            this.productData = product;
-            updateUIWithProductDetails();
-        } else {
-            System.out.println("Product data is null.");
-
-        }
+    private void initialize() {
+        productContainer.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     }
 
-    private void updateUIWithProductDetails() {
-        productname.setText(productData.getProductName());
-        productprice.setText("$" + String.format("%.2f", productData.getPrice()));
-        productrating.setText(String.valueOf(productData.getRating()));
-        productdescription.setText(productData.getDescription());
-        displayCategories();
-        loadImage();
-    }
-    private void displayCategories() {
-        if (productData.getCategories() != null) {
-            productcategory.setText(productData.getCategories().stream()
-                    .map(Category::getName)
-                    .collect(Collectors.joining(", ")));
-        } else {
-            productcategory.setText("No categories available");
-        }
+    @FXML
+    void loadProductsForCategory(ActionEvent event) {
+        Hyperlink selectedCategory = (Hyperlink) event.getSource();
+        String category = selectedCategory.getText();
+        productContainer.setContent(null);
+        List<Product> products = getProductsForCategory(category);
+        displayProducts(products);
     }
 
-    private void loadImage() {
-        Blob imageBlob = productData.getImageBlob();
-        if (imageBlob != null) {
-            try (InputStream inputStream = imageBlob.getBinaryStream()) {
-                Image image = new Image(inputStream);
-                productImage.setImage(image);
-            } catch (Exception e) {
-                System.err.println("Failed to load image: " + e.getMessage());
-                e.printStackTrace();
-                productImage.setImage(null);
+    private void displayProducts(List<Product> products) {
+        VBox productBox = new VBox();
+        for (Product product : products) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/cus1166/ecommerceapp/productcard.fxml"));
+                Parent productCard = loader.load();
+                ProductController controller = loader.getController();
+                controller.initData(product.getProductId());
+                productBox.getChildren().add(productCard);
+            } catch (IOException e) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Error loading product card", e);
             }
-        } else {
-            System.out.println("No image data available.");
-            productImage.setImage(null);
         }
+        productContainer.setContent(productBox);
     }
-    @FXML
-    private void addToCartClicked(ActionEvent event) {
-        addToCart(productData);
-        int amount = shoppingCart.getAmountInCart(productData);
-        amountincart.setText(String.valueOf(amount));
-        totalcartamount.setText("$" + String.format("%.2f", shoppingCart.getTotalCartAmount()));
+
+    private List<Product> getProductsForCategory(String category) {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT p.product_id, p.name, p.description, p.price " +
+                "FROM product p " +
+                "INNER JOIN product_category pc ON p.product_id = pc.product_id " +
+                "INNER JOIN category c ON pc.category_id = c.category_id " +
+                "WHERE c.category_name = ?";
+        try (Connection conn = DBUtils.ConnectDb();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, category);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    int productId = rs.getInt("product_id");
+                    String name = rs.getString("name");
+                    String description = rs.getString("description");
+                    double price = rs.getDouble("price");
+                    Product product = new Product(productId, name, price, null, description, null, 0, null);
+                    products.add(product);
+                }
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Error retrieving products for category", e);
+        }
+        return products;
     }
 
 
@@ -260,6 +252,4 @@ public class ProductPageController {
             LOGGER.log(Level.SEVERE, "Failed to switch to Categories page", e);
         }
     }
-
-
 }

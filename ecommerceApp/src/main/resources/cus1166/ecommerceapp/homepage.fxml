@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.HomepageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.HomepageController">
    <children>
       <VBox prefHeight="100.0" prefWidth="1300.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -30,7 +29,7 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="100.0">
                      <children>
-                        <Hyperlink fx:id="categories" alignment="CENTER" prefHeight="106.0" prefWidth="107.0" styleClass="mouse-moved" text="Categories" visited="true">
+                        <Hyperlink fx:id="categories" alignment="CENTER" onAction="#switchToCategoriesPage" prefHeight="106.0" prefWidth="107.0" styleClass="mouse-moved" text="Categories" visited="true">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -39,7 +38,6 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="250.0">
                      <children>
-                        <TextField fx:id="searchbar" prefHeight="32.0" prefWidth="222.0" promptText="Search" />
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
                            <children>
                               <Button fx:id="searchLogo" mnemonicParsing="false" onAction="#switchToSearchPage" opacity="0.5" styleClass="white-background">
@@ -66,40 +64,12 @@
                      </children>
                   </HBox>
                   <HBox fx:id="SPACER" prefHeight="100.0" prefWidth="132.0" />
-                  <HBox prefHeight="100.0" prefWidth="116.0">
-                     <children>
-                        <Hyperlink fx:id="manageusers" alignment="CENTER" onAction="#switchToManageUsersPage" prefHeight="100.0" prefWidth="143.0" styleClass="mouse-moved" text="Manage Users" visited="true">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Hyperlink>
-                     </children>
-                  </HBox>
-                  <HBox layoutX="936.0" layoutY="10.0" prefHeight="100.0" prefWidth="118.0">
-                     <children>
-                        <Hyperlink fx:id="addproducts" alignment="CENTER" onAction="#switchToAddProductsPage" prefHeight="111.0" prefWidth="110.0" styleClass="mouse-moved" text="Add Products" visited="true">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Hyperlink>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="100.0">
-                     <children>
-                        <Hyperlink fx:id="manageproducts" alignment="CENTER" onAction="#switchToManageProductsPage" prefHeight="100.0" prefWidth="115.0" text="Manage Products" visited="true" wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="mouse-moved" />
-                              <String fx:value="selected" />
-                           </styleClass>
-                        </Hyperlink>
-                     </children>
-                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="116.0" />
+                  <HBox layoutX="936.0" layoutY="10.0" prefHeight="100.0" prefWidth="118.0" />
+                  <HBox prefHeight="100.0" prefWidth="100.0" />
                   <HBox fx:id="switchToUserPage" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
                      <children>
-                        <Button fx:id="userProfileIcon" mnemonicParsing="false">
+                        <Button fx:id="userProfileIcon" mnemonicParsing="false" onAction="#switchToUserPage">
                            <graphic>
                               <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -116,17 +86,19 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
                      <children>
-                        <Button fx:id="cart" mnemonicParsing="false">
+                        <Button fx:id="cart" mnemonicParsing="false" onAction="#switchToCartPage">
                            <styleClass>
                               <String fx:value="white-background" />
                               <String fx:value="mouse-moved" />
                            </styleClass>
+                           <graphic>
+                              <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/cart.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
-                        <ImageView fitHeight="46.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Images/cart.png" />
-                           </image>
-                        </ImageView>
                      </children>
                   </HBox>
                </children>
@@ -139,7 +111,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <ScrollPane prefHeight="280.0" prefWidth="1300.0">
+            <ScrollPane fx:id="recentlyAddedScrollPane" prefHeight="280.0" prefWidth="1300.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="1300.0">
                      <children>

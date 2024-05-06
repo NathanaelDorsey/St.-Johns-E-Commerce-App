@@ -124,7 +124,7 @@ public class LoginPageController implements Initializable {
             String selectedAccountType = accountType.getValue().toString();
             System.out.println("Selected Account Type: " + selectedAccountType);
 
-            if ("user".equals(selectedAccountType)) {
+            if ("User".equals(selectedAccountType)) {
                 sql = "SELECT * FROM user WHERE username = ? AND password = ?";
             } else if ("Administrator".equals(selectedAccountType)) {
                 sql = "SELECT * FROM user WHERE username = ? AND password = ? AND is_admin = 1";
@@ -145,7 +145,8 @@ public class LoginPageController implements Initializable {
                         JOptionPane.showMessageDialog(null, "Successfully logged in.");
                         if (selectedAccountType == "administrator") {
                              root = FXMLLoader.load(getClass().getResource("Admins/homepageadmin.fxml"));
-                        }else{root = FXMLLoader.load(getClass().getResource("homepage.fxml"));}
+                        }else{
+                            root= FXMLLoader.load(getClass().getResource("/cus1166/ecommerceapp/homepage.fxml"));}
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);
                         stage.setScene(scene);
