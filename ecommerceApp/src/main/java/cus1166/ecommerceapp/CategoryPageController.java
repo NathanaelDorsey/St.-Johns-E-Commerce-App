@@ -1,17 +1,13 @@
 package cus1166.ecommerceapp;
-import javafx.fxml.FXML;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import models.Product;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,10 +19,46 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import models.Product;
 
-public class HomepageControllerAdmin {
 
-    protected static final Logger LOGGER = Logger.getLogger(HomepageControllerAdmin.class.getName());
+import static cus1166.ecommerceapp.HomepageControllerAdmin.LOGGER;
+
+public class CategoryPageController {
+
+    @FXML
+    private Hyperlink clothingtab;
+
+    @FXML
+    private Hyperlink gifttab;
+
+    @FXML
+    private Hyperlink electronictab;
+
+    @FXML
+    private Hyperlink schooltab;
+
+    @FXML
+    private Hyperlink alumnitab;
+
+    @FXML
+    private Hyperlink graduationtab;
+
+    @FXML
+    private Hyperlink dormtab;
+
+    @FXML
+    private Hyperlink healthtab;
+
+    @FXML
+    private Hyperlink bookstab;
+
     @FXML
     private Hyperlink home;
 
@@ -38,6 +70,9 @@ public class HomepageControllerAdmin {
 
     @FXML
     private Button searchLogo;
+
+    @FXML
+    private HBox SPACER1;
 
     @FXML
     private ImageView stjohnsLogo;
@@ -55,45 +90,36 @@ public class HomepageControllerAdmin {
     private Hyperlink manageproducts;
 
     @FXML
+    private HBox switchToUserPage;
+
+    @FXML
     private Button userProfileIcon;
+
+    @FXML
+    private HBox switchToCartPage;
 
     @FXML
     private Button cart;
 
     @FXML
-    private ScrollPane recentlyAddedScrollPane;
+    private ScrollPane productContainer;
 
-    public void initialize() {
-        loadProducts();
+    @FXML
+    private void initialize() {
+        productContainer.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     }
 
-    private void loadProducts() {
-        try (Connection conn = DBUtils.ConnectDb();
-             PreparedStatement statement = conn.prepareStatement("SELECT * FROM product");
-             ResultSet resultSet = statement.executeQuery()) {
-
-            List<Product> products = new ArrayList<>();
-            while (resultSet.next()) {
-                int productId = resultSet.getInt("product_id");
-                String productName = resultSet.getString("name");
-                double price = resultSet.getDouble("price");
-                Product.StockStatus stockStatus = Product.StockStatus.valueOf(resultSet.getString("stock_status"));
-                String description = resultSet.getString("description");
-                Product product = new Product(productId, productName, price, stockStatus, description, null, 0, null);
-                products.add(product);
-            }
-
-            displayProducts(products);
-
-        } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Error loading products", e);
-        }
+    @FXML
+    void loadProductsForCategory(ActionEvent event) {
+        Hyperlink selectedCategory = (Hyperlink) event.getSource();
+        String category = selectedCategory.getText();
+        productContainer.setContent(null);
+        List<Product> products = getProductsForCategory(category);
+        displayProducts(products);
     }
 
     private void displayProducts(List<Product> products) {
-        recentlyAddedScrollPane.setContent(null);
-        HBox productBox = new HBox();
-        recentlyAddedScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        VBox productBox = new VBox();
         for (Product product : products) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/cus1166/ecommerceapp/productcard.fxml"));
@@ -102,13 +128,37 @@ public class HomepageControllerAdmin {
                 controller.initData(product.getProductId());
                 productBox.getChildren().add(productCard);
             } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "Error loading product card", e);
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Error loading product card", e);
             }
         }
-
-        recentlyAddedScrollPane.setContent(productBox);
+        productContainer.setContent(productBox);
     }
 
+    private List<Product> getProductsForCategory(String category) {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT p.product_id, p.name, p.description, p.price " +
+                "FROM product p " +
+                "INNER JOIN product_category pc ON p.product_id = pc.product_id " +
+                "INNER JOIN category c ON pc.category_id = c.category_id " +
+                "WHERE c.category_name = ?";
+        try (Connection conn = DBUtils.ConnectDb();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, category);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    int productId = rs.getInt("product_id");
+                    String name = rs.getString("name");
+                    String description = rs.getString("description");
+                    double price = rs.getDouble("price");
+                    Product product = new Product(productId, name, price, null, description, null, 0, null);
+                    products.add(product);
+                }
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Error retrieving products for category", e);
+        }
+        return products;
+    }
 
 
     public void switchToSearchPage(javafx.event.ActionEvent event) throws IOException {
@@ -117,17 +167,6 @@ public class HomepageControllerAdmin {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-    public void switchToCategoriesPage(javafx.event.ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/categoriespage.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Failed to switch to Categories page", e);
-        }
     }
 
     public void switchToManageUsersPage(javafx.event.ActionEvent event) {
@@ -202,6 +241,15 @@ public class HomepageControllerAdmin {
             LOGGER.log(Level.SEVERE, "Failed to switch to Cart page", e);
         }
     }
-
-
+    public void switchToCategoriesPage(javafx.event.ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cus1166/ecommerceapp/categoriespage.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Failed to switch to Categories page", e);
+        }
+    }
 }

@@ -15,26 +15,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.UserPageController">
+<AnchorPane prefHeight="800.0" prefWidth="1300.0" styleClass="white-background" stylesheets="@CSS/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cus1166.ecommerceapp.UserPageController">
    <children>
       <HBox prefHeight="100.0" prefWidth="1301.0" stylesheets="@CSS/style.css">
          <children>
             <HBox prefHeight="100.0" prefWidth="100.0">
                <children>
-                  <Hyperlink fx:id="home" alignment="CENTER" prefHeight="111.0" prefWidth="110.0" text="Home" visited="true">
+                  <Hyperlink fx:id="home" alignment="CENTER" prefHeight="111.0" prefWidth="110.0" styleClass="mouse-moved" text="Home" visited="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
-                     <styleClass>
-                        <String fx:value="mouse-moved" />
-                        <String fx:value="selected" />
-                     </styleClass>
                   </Hyperlink>
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="100.0">
                <children>
-                  <Hyperlink fx:id="categories" alignment="CENTER" prefHeight="106.0" prefWidth="107.0" styleClass="mouse-moved" text="Categories" visited="true">
+                  <Hyperlink fx:id="categories" alignment="CENTER" onAction="#switchToCategoriesPage" prefHeight="106.0" prefWidth="107.0" styleClass="mouse-moved" text="Categories" visited="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -97,7 +93,7 @@
                   </Hyperlink>
                </children>
             </HBox>
-            <HBox fx:id="switchToUserPage" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
+            <HBox fx:id="switchToUserPage" alignment="CENTER" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <Button fx:id="userProfileIcon" mnemonicParsing="false" onAction="#switchToUserPage">
                      <graphic>
@@ -113,6 +109,10 @@
                      </styleClass>
                   </Button>
                </children>
+               <styleClass>
+                  <String fx:value="mouse-moved" />
+                  <String fx:value="selected" />
+               </styleClass>
             </HBox>
             <HBox fx:id="switchToCartPage" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" styleClass="mouse-moved">
                <children>
