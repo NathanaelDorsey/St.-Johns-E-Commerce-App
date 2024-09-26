@@ -1,5 +1,5 @@
 Gregorios - Responsible for Database using MySQL
 
-Nathan - Responsible for Front End using javafx
+Nathan - Responsible for Front End using Javafx assisted with Back End Using Java
 
-Ben - Responsible for Back End using Intellij
+Ben - Responsible for Back End using Java
